@@ -24,11 +24,19 @@ def create_app(config=Config):
         }
         params = {
             "location": "Vancouver",
-            "term": "restaurants"
+            "term": "restaurants",
+            "limit": 50,
+            "offset": 1
         }
-        response = requests.get("https://api.yelp.com/v3/businesses/search", headers=headers, params=params)
-        print(response.json())
-        return response.json()
+        total = None
+        params["offset"] += 50
+        while (not total or params["offset"] <= total):
+            res = requests.get("https://api.yelp.com/v3/businesses/search", headers=headers, params=params)
+            params["offset"] += 50
+            if not total:
+                total = res.json()["total"]
+
+        return "Successfully fetched Vancouver restaurants"
 
     @app.route("/get")
     def getAllRestaurants():
