@@ -8,7 +8,7 @@ load_dotenv()
 class Restaurant(db.Model):
     __tablename__ = 'restaurant'
     __table_args__ = {'schema': os.getenv("SCHEMA")}
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     yelp_business_id = db.Column(db.String(150), nullable=False, unique=True)
     name = db.Column(db.String(150), nullable=False, unique=False)
     address = db.Column(db.String(150), nullable=True, unique=False)
@@ -29,7 +29,7 @@ class Restaurant(db.Model):
 class BusinessHours(db.Model):
     __tablename__ = 'business_hours'
     __table_args__ = {'schema': os.getenv("SCHEMA")}
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.restaurant.id'), nullable=False, unique=True)
     monday = db.Column(ARRAY(db.Text), nullable=False, unique=False)
     tuesday = db.Column(ARRAY(db.Text), nullable=False, unique=False)
@@ -47,7 +47,7 @@ class BusinessHours(db.Model):
 class Menu(db.Model):
     __tablename__ = 'menu'
     __table_args__ = {'schema': os.getenv("SCHEMA")}
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.restaurant.id'), nullable=False, unique=True)
     menu_url = db.Column(db.String(150), nullable=False, unique=True)
     popular_dishes = db.Column(ARRAY(db.String(150)), nullable=False, unique=False)
