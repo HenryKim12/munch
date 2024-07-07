@@ -1,13 +1,13 @@
-from flask import render_template
-from . import main
+from flask import Blueprint, render_template
 from app.extensions import db
-from ..models import Restaurant
 import requests
 import os
 from dotenv import load_dotenv
-from . import services
+from . import services, models
 
 load_dotenv()
+
+main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
@@ -19,12 +19,12 @@ def about():
 
 @main.route("/collect")
 def collect():
-    services.fetchRestaurants()
-    return "Successfully fetched Vancouver restaurants"
+    return services.fetchRestaurants()
+    # return "Successfully fetched Vancouver restaurants"
 
 @main.route("/add_restaurant")
 def createRestaurant():
-    newRestaurant = Restaurant(id=1, title="McDonalds")
+    newRestaurant = models.Restaurant(id=1, title="McDonalds")
     db.session.add(newRestaurant)
     db.session.commit()
     return 'User created successfully!'

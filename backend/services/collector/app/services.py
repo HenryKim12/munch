@@ -15,37 +15,49 @@ def fetchRestaurants():
         "limit": 50,
     }
 
-    daysOfWeek = {
-        0: "Monday",
-        1: "Tuesday",
-        2: "Wednesday",
-        3: "Thursday",
-        4: "Friday",
-        5: "Saturday",
-        6: "Sunday"
-    }
+    # daysOfWeek = {
+    #     0: "Monday",
+    #     1: "Tuesday",
+    #     2: "Wednesday",
+    #     3: "Thursday",
+    #     4: "Friday",
+    #     5: "Saturday",
+    #     6: "Sunday"
+    # }
 
-    res = requests.get("https://api.yelp.com/v3/businesses/search", headers=headers, params=params)
-    restaurants = res["businesses"]
+    response = requests.get("https://api.yelp.com/v3/businesses/search", headers=headers, params=params)
+    restaurants = response.json()["businesses"]
     for restaurant in restaurants:
+
         name = restaurant["name"]
         yelp_business_id = restaurant["id"]
         display_address = restaurant["location"]["display_address"]
         location = ""
         for address in display_address:
             location += address
-        cuisine = restaurant["id"] #categories??
+        categoriesList = restaurant["categories"]
+        categories =[]
+        for category in categoriesList:
+            categories.append(category["title"])
         priceRange = restaurant["price"]
         rating = restaurant["rating"]
         weeklyHours = restaurant["business_hours"]["open"]
-        businessHours = ""
+        businessHours = []
         for i in range(7):
+            day = ""
             dailyHours = weeklyHours[i]
-            businessHours += daysOfWeek[dailyHours["day"]]
-            businessHours += " from "
-            businessHours += dailyHours["start"]
-            businessHours += " to "
-            businessHours += dailyHours["end"]
+            # businessHours += daysOfWeek[dailyHours["day"]]
+            day += dailyHours["start"]
+            day += " to "
+            day += dailyHours["end"]
+            businessHours.append(day)
+
+        url = restaurant["url"]
+
+    return response.json()
+        
+
+        
 
     # Iterate through all of Vancouver restaurants
     # params = {
