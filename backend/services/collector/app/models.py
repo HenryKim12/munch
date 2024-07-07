@@ -12,7 +12,7 @@ class Restaurant(db.Model):
     yelp_business_id = db.Column(db.String(150), nullable=False, unique=True)
     name = db.Column(db.String(150), nullable=False, unique=False)
     address = db.Column(db.String(150), nullable=True, unique=False)
-    phone_number = db.Column(db.String(12), nullable=True, unique=True)
+    phone_number = db.Column(db.String(20), nullable=True, unique=True)
     menu_id = db.Column(db.Integer, db.ForeignKey('restaurant.menu.id'), nullable=True, unique=True)
     menu = db.relationship('menu', backref='restaurant')
     categories = db.Column(ARRAY(db.String), nullable=True, unique=False)

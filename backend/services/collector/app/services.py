@@ -4,59 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-def fetchRestaurants():
-    headers = {
-        "accept": "application/json", 
-        "Authorization": f"Bearer {os.getenv("API_KEY")}",
-    }
-    params = {
-        "location": "Vancouver",
-        "term": "restaurants",
-        "limit": 50,
-    }
-
-    # daysOfWeek = {
-    #     0: "Monday",
-    #     1: "Tuesday",
-    #     2: "Wednesday",
-    #     3: "Thursday",
-    #     4: "Friday",
-    #     5: "Saturday",
-    #     6: "Sunday"
-    # }
-
-    response = requests.get("https://api.yelp.com/v3/businesses/search", headers=headers, params=params)
-    restaurants = response.json()["businesses"]
-    for restaurant in restaurants:
-        name = restaurant["name"]
-        yelp_business_id = restaurant["id"]
-        display_address = restaurant["location"]["display_address"]
-        location = ""
-        for address in display_address:
-            location += address
-        categoriesList = restaurant["categories"]
-        categories =[]
-        for category in categoriesList:
-            categories.append(category["title"])
-        priceRange = restaurant["price"]
-        rating = restaurant["rating"]
-        weeklyHours = restaurant["business_hours"]["open"]
-        businessHours = []
-        for i in range(7):
-            day = ""
-            dailyHours = weeklyHours[i]
-            # businessHours += daysOfWeek[dailyHours["day"]]
-            day += dailyHours["start"]
-            day += " to "
-            day += dailyHours["end"]
-            businessHours.append(day)
-
-        url = restaurant["url"]
-
-    return response.json()
-        
-
-        
+YELP_API_URL = "https://api.yelp.com/v3/businesses/search"
 
     # Iterate through all of Vancouver restaurants
     # params = {
@@ -72,3 +20,40 @@ def fetchRestaurants():
     #     params["offset"] += 50
     #     if not total:
     #         total = res.json()["total"]
+def fetchRestaurants():
+    headers = {
+        "accept": "application/json", 
+        "Authorization": f"Bearer {os.getenv("API_KEY")}",
+    }
+    params = {
+        "location": "Vancouver",
+        "term": "restaurants",
+        "limit": 50,
+    }
+
+    response = requests.get(YELP_API_URL, headers=headers, params=params)
+    restaurants = response.json()["businesses"]
+    for restaurant in restaurants:
+        yelp_business_id = restaurant["id"]
+        name = restaurant["name"]
+        phone_number = restaurant["display_phone"]
+        menu_url = restaurant["attributes"]["menu_url"]
+        price = restaurant["price"]
+        rating = restaurant["rating"]
+
+        address = ""
+        display_address = restaurant["location"]["display_address"]
+        for val in display_address:
+            address += val
+
+        open_hours = restaurant["business_hours"]["open"]
+        business_hours = {k: [] for k in range(7)}
+        for val in open_hours:
+            daily_hours = f"{val["start"]} to {val["end"]}"
+            business_hours[val["day"]].append(daily_hours)
+
+        url = restaurant["url"]
+        # categories (people also searched for section) + popular dishes grabbed from scraping page
+
+    return response.json()
+        
