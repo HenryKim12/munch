@@ -28,7 +28,6 @@ def fetchRestaurants():
     response = requests.get("https://api.yelp.com/v3/businesses/search", headers=headers, params=params)
     restaurants = response.json()["businesses"]
     for restaurant in restaurants:
-
         name = restaurant["name"]
         yelp_business_id = restaurant["id"]
         display_address = restaurant["location"]["display_address"]

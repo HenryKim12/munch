@@ -22,9 +22,9 @@ def collect():
     return services.fetchRestaurants()
     # return "Successfully fetched Vancouver restaurants"
 
-@main.route("/add_restaurant")
-def createRestaurant():
-    newRestaurant = models.Restaurant(id=1, title="McDonalds")
-    db.session.add(newRestaurant)
-    db.session.commit()
-    return 'User created successfully!'
+# @main.route("/add_restaurant")
+# def createRestaurant():
+#     newRestaurant = models.Restaurant(id=1, title="McDonalds")
+#     db.session.add(newRestaurant)
+#     db.session.commit()
+#     return 'User created successfully!'
