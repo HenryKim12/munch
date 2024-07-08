@@ -20,6 +20,7 @@ class Restaurant(db.Model):
     rating = db.Column(db.Float, nullable=True, unique=False)
     business_hours_id = db.Column(db.Integer, db.ForeignKey('restaurant.business_hours.id'), nullable=True, unique=False)
     business_hours = db.relationship('business_hours', backref='restaurant')
+    yelp_url = db.Column(db.Text, nullable=False, unique=True)
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp(), nullable=False, unique=False)
     updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), nullable=False, unique=False)
 
