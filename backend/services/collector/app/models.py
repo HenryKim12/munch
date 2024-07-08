@@ -50,7 +50,7 @@ class Menu(db.Model):
     __table_args__ = {'schema': os.getenv("SCHEMA")}
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.restaurant.id'), nullable=False, unique=True)
-    menu_url = db.Column(db.String(150), nullable=False, unique=True)
+    url = db.Column(db.String(150), nullable=False, unique=True)
     popular_dishes = db.Column(ARRAY(db.String(150)), nullable=False, unique=False)
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp(), nullable=False, unique=False)
     updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), nullable=False, unique=False)

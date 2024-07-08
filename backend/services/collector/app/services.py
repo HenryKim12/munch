@@ -38,7 +38,8 @@ def fetchRestaurants():
         response = requests.get(YELP_API_URL, headers=headers, params=params)
         restaurants = response.json()["businesses"]
         for restaurant in restaurants:
-            if not (restaurant["url"] and restaurant["rating"] and restaurant["price"] and restaurant["business_hours"]):
+            if not (restaurant["url"] and restaurant["rating"] and restaurant["price"] and restaurant["business_hours"] and 
+                    restaurant["attributes"]):
                 continue
 
             content = {}
@@ -73,6 +74,11 @@ def fetchRestaurants():
 
             # categories (people also searched for section) + popular dishes grabbed from scraping page
             scraped_data = scrape(content["yelp_url"]) 
+
+            exists = restaurant_exists(content["yelp_business_id"])
+            if exists:
+                update_restaurant(content, scraped_data)
+                continue
 
             menu_instance = models.Menu(
                 menu_url=content["menu_url"], 
@@ -141,3 +147,48 @@ def scrape(url: str) -> dict:
         raise Exception(error)
 
     return data
+
+def restaurant_exists(yelp_business_id: str) -> bool:
+    return db.session.query(db.exists().where(models.Restaurant.yelp_business_id == yelp_business_id)).scalar()
+
+def update_restaurant(content: dict, scraped_data: dict) -> None:
+    restaurant = models.Restaurant.query.filter_by(yelp_business_id=content["yelp_business_id"]).first()
+    if restaurant.name != content["name"]: restaurant.name = content["name"]
+    if restaurant.address != content["address"]: restaurant.address = content["address"]
+    if restaurant.phone_number != content["phone_number"]: restaurant.phone_number = content["phone_number"]
+    if restaurant.menu.url != content["menu_url"]: restaurant.menu.url = content["menu_url"]
+    if restaurant.price != content["price"]: restaurant.price = content["price"]
+    if restaurant.rating != content["rating"]: restaurant.rating = content["rating"]
+    if restaurant.yelp_url != content["yelp_url"]: restaurant.yelp_url = content["yelp_url"]
+
+    if restaurant.business_hours.monday != content["business_hours"][0]: 
+        restaurant.business_hours.monday = content["business_hours"][0]
+
+    if restaurant.business_hours.tuesday != content["business_hours"][1]: 
+        restaurant.business_hours.tuesday = content["business_hours"][1]
+
+    if restaurant.business_hours.wednesday != content["business_hours"][2]: 
+        restaurant.business_hours.wednesday = content["business_hours"][2]
+
+    if restaurant.business_hours.thursday != content["business_hours"][3]: 
+        restaurant.business_hours.thursday = content["business_hours"][3]
+
+    if restaurant.business_hours.friday != content["business_hours"][4]: 
+        restaurant.business_hours.friday = content["business_hours"][4]
+
+    if restaurant.business_hours.saturday != content["business_hours"][5]: 
+        restaurant.business_hours.saturday = content["business_hours"][5]
+
+    if restaurant.business_hours.sunday != content["business_hours"][6]: 
+        restaurant.business_hours.sunday = content["business_hours"][6]
+
+    # update menu popular dishes + categories
+    for category in scraped_data["categories"]:
+        if not restaurant.categories.includes(category):
+            restaurant.categories.append(category)
+    
+    for dish in scraped_data["menu"]:
+        if not restaurant.menu.popular_dishes.includes(dish):
+            restaurant.menu.popular_dishes.append(dish)
+
+    db.session.commit()
