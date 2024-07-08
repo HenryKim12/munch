@@ -42,4 +42,4 @@ venv
 .env
 .env-my
 
-migrations
+migrations/
