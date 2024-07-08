@@ -41,3 +41,5 @@ venv
 # Environment files
 .env
 .env-my
+
+migrations

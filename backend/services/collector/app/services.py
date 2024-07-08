@@ -38,52 +38,70 @@ def fetchRestaurants():
         response = requests.get(YELP_API_URL, headers=headers, params=params)
         restaurants = response.json()["businesses"]
         for restaurant in restaurants:
-            yelp_business_id = restaurant["id"]
-            name = restaurant["name"]
-            phone_number = restaurant["display_phone"]
-            menu_url = restaurant["attributes"]["menu_url"]
-            price = restaurant["price"]
-            rating = restaurant["rating"]
+            if not (restaurant["url"] and restaurant["rating"] and restaurant["price"] and restaurant["business_hours"]):
+                continue
+
+            content = {}
+            content["yelp_business_id"] = restaurant["id"]
+            content["name"] = restaurant["name"]
+            content["phone_number"] = restaurant["display_phone"]
+            content["menu_url"] = restaurant["attributes"]["menu_url"]
+            content["price"] = restaurant["price"]
+            content["rating"] = restaurant["rating"]
+            content["yelp_url"] = restaurant["url"]
 
             address = ""
             display_address = restaurant["location"]["display_address"]
             for val in display_address:
                 address += val
+            content["address"] = address
 
             open_hours = restaurant["business_hours"]["open"]
             business_hours = {k: [] for k in range(7)}
             for val in open_hours:
                 daily_hours = f"{val["start"]}-{val["end"]}"
                 business_hours[val["day"]].append(daily_hours)
+            content["business_hours"] = business_hours
 
-            url = restaurant["url"]
-            scraped_data = scrape(url) # categories (people also searched for section) + popular dishes grabbed from scraping page
+            is_valid = True
+            for value in content.values():
+                if not value:
+                    is_valid = False
+                    break
+            if not is_valid:
+                continue
 
-            menu_instance = models.Menu(menu_url=menu_url, popular_dishes=scraped_data["menu"])
+            # categories (people also searched for section) + popular dishes grabbed from scraping page
+            scraped_data = scrape(content["yelp_url"]) 
+
+            menu_instance = models.Menu(
+                menu_url=content["menu_url"], 
+                popular_dishes=scraped_data["menu"]
+            )
             db.session.add(menu_instance)
 
             businessHours_instance = models.BusinessHours(
-                monday=business_hours[0], 
-                tuesday=business_hours[1], 
-                wednesday=business_hours[2], 
-                thursday=business_hours[3], 
-                friday=business_hours[4], 
-                saturday=business_hours[5], 
-                sunday=business_hours[6], 
+                monday=content["business_hours"][0], 
+                tuesday=content["business_hours"][1], 
+                wednesday=content["business_hours"][2], 
+                thursday=content["business_hours"][3], 
+                friday=content["business_hours"][4], 
+                saturday=content["business_hours"][5], 
+                sunday=content["business_hours"][6], 
             )
             db.session.add(businessHours_instance)
 
             restaurant_instance = models.Restaurant(
-                yelp_business_id= yelp_business_id,
-                name= yelp_business_id,
-                address= yelp_business_id,
-                phone_number= yelp_business_id,
+                yelp_business_id= content["yelp_business_id"],
+                name= content["name"],
+                address= content["address"],
+                phone_number= content["phone_number"],
                 menu= menu_instance,
                 categories= scraped_data["categories"],
-                price= price,
-                rating= rating,
+                price= content["price"],
+                rating= content["rating"],
                 business_hours= businessHours_instance,
-                yelp_url= url,
+                yelp_url= content["yelp_url"],
             )
             db.session.add(restaurant_instance)
             db.session.commit()
@@ -97,7 +115,8 @@ def fetchRestaurants():
 def scrape(url: str) -> dict: 
     try:
         data = {}
-        response = requests.get("https://www.yelp.com/biz/the-flying-pig-vancouver-5?adjust_creative=SuhzlSss_Ymp7bpjhwEWSA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=SuhzlSss_Ymp7bpjhwEWSA")
+        # "https://www.yelp.com/biz/the-flying-pig-vancouver-5?adjust_creative=SuhzlSss_Ymp7bpjhwEWSA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=SuhzlSss_Ymp7bpjhwEWSA"
+        response = requests.get(url=url)
         soup = BeautifulSoup(response.text, "html.parser")
         main = soup.find_all("main", id="main-content")[0]
 

@@ -13,7 +13,7 @@ def create_app(config=Config):
     app.config.from_object(config)
 
     db.init_app(app)
-    migrate = Migrate(app, db)
+    migrate = Migrate(app, db, include_schemas=True)
     with app.app_context():
         app.register_blueprint(routes.main)
 
