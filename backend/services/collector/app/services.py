@@ -1,5 +1,6 @@
 import requests
 import os
+from flask import jsonify, request
 from dotenv import load_dotenv
 from bs4 import BeautifulSoup
 from datetime import datetime
@@ -114,9 +115,9 @@ def fetchRestaurants():
 
     except Exception as error:
         print(f"[{datetime.now()}] Error while collecting restaurant data: {error}")
-        return "Fail"
+        return "Failed to collect/update restaurant data"
 
-    return "Success"
+    return "Successfully collected/updated restaurant data"
 
 def scrape(url: str) -> dict: 
     try:
@@ -192,3 +193,11 @@ def update_restaurant(content: dict, scraped_data: dict) -> None:
             restaurant.menu.popular_dishes.append(dish)
 
     db.session.commit()
+
+def get_restaurants():
+    restaurants = models.Restaurant.query.all()
+    return jsonify(restaurants)
+
+def get_restaurant_by_id(id):
+    restaurant = models.Restaurant.get(id)
+    return jsonify(restaurant)

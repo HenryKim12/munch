@@ -9,22 +9,14 @@ load_dotenv()
 
 main = Blueprint('main', __name__)
 
-@main.route('/')
-def index():
-    return "Hello, this is the main index page."
+@main.route('/restaurants', methods=["GET"])
+def get():
+    return services.get_restaurants()
 
-@main.route('/about')
-def about():
-    return "This is the about page."
+@main.route('/restaurants/<int:id>', methods=["GET"])
+def getByID(id):
+    return services.get_restaurant_by_id(id)
 
-@main.route("/collect")
+@main.route("/collect", methods=["GET"])
 def collect():
     return services.fetchRestaurants()
-    # return "Successfully fetched Vancouver restaurants"
-
-# @main.route("/add_restaurant")
-# def createRestaurant():
-#     newRestaurant = models.Restaurant(id=1, title="McDonalds")
-#     db.session.add(newRestaurant)
-#     db.session.commit()
-#     return 'User created successfully!'
