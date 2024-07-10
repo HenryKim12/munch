@@ -1,6 +1,8 @@
 require("dotenv").config();
 var cors = require("cors");
 
+const collectorRouter = require("./routers/collectorRouter")
+
 const express = require("express");
 const app = express();
 app.use(cors())
@@ -8,9 +10,11 @@ app.use(cors())
 // middleware
 app.use(express.json());
 app.use((req, res, next) => {
-    console.log(req.path, req.method);
+    console.log(`[${new Date()}] ${req.method}: ${req.path}`);
     next();
 })
+
+app.use("/service/collector", collectorRouter)
 
 app.listen(process.env.PORT, () => {
     console.log(`listening on port ${process.env.PORT}`);
