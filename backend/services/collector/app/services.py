@@ -25,7 +25,7 @@ YELP_API_URL = "https://api.yelp.com/v3/businesses/search"
     #     params["offset"] += 50
     #     if not total:
     #         total = res.json()["total"]
-def fetchRestaurants():
+def fetchRestaurants() -> None:
     headers = {
         "accept": "application/json", 
         "Authorization": f"Bearer {os.getenv("API_KEY")}",
@@ -36,6 +36,7 @@ def fetchRestaurants():
             "term": "restaurants",
             "limit": 3,
         }
+        restaurant_contents = []
         response = requests.get(YELP_API_URL, headers=headers, params=params)
         restaurants = response.json()["businesses"]
         for restaurant in restaurants:
@@ -74,50 +75,51 @@ def fetchRestaurants():
                 continue
 
             # categories (people also searched for section) + popular dishes grabbed from scraping page
-            scraped_data = scrape(content["yelp_url"]) 
+            content["scraped_data"] = scrape(content["yelp_url"]) 
+            restaurant_contents.append(content)
 
-            exists = restaurant_exists(content["yelp_business_id"])
-            if exists:
-                update_restaurant(content, scraped_data)
-                continue
-
-            menu_instance = models.Menu(
-                menu_url=content["menu_url"], 
-                popular_dishes=scraped_data["menu"]
-            )
-            db.session.add(menu_instance)
-
-            businessHours_instance = models.BusinessHours(
-                monday=content["business_hours"][0], 
-                tuesday=content["business_hours"][1], 
-                wednesday=content["business_hours"][2], 
-                thursday=content["business_hours"][3], 
-                friday=content["business_hours"][4], 
-                saturday=content["business_hours"][5], 
-                sunday=content["business_hours"][6], 
-            )
-            db.session.add(businessHours_instance)
-
-            restaurant_instance = models.Restaurant(
-                yelp_business_id= content["yelp_business_id"],
-                name= content["name"],
-                address= content["address"],
-                phone_number= content["phone_number"],
-                menu= menu_instance,
-                categories= scraped_data["categories"],
-                price= content["price"],
-                rating= content["rating"],
-                business_hours= businessHours_instance,
-                yelp_url= content["yelp_url"],
-            )
-            db.session.add(restaurant_instance)
-            db.session.commit()
-
+        update_db(restaurant_contents)
     except Exception as error:
         print(f"[{datetime.now()}] Error while collecting restaurant data: {error}")
-        return "Failed to collect/update restaurant data"
 
-    return "Successfully collected/updated restaurant data"
+def update_db(restaurant_contents: list[dict]) -> None:
+    for content in restaurant_contents:
+        exists = restaurant_exists(content["yelp_business_id"])
+        if exists:
+            update_restaurant(content)
+            continue
+            
+        menu_instance = models.Menu(
+                menu_url=content["menu_url"], 
+                popular_dishes=content["scraped_data"]["menu"]
+            )
+        db.session.add(menu_instance)
+
+        businessHours_instance = models.BusinessHours(
+            monday=content["business_hours"][0], 
+            tuesday=content["business_hours"][1], 
+            wednesday=content["business_hours"][2], 
+            thursday=content["business_hours"][3], 
+            friday=content["business_hours"][4], 
+            saturday=content["business_hours"][5], 
+            sunday=content["business_hours"][6], 
+        )
+        db.session.add(businessHours_instance)
+
+        restaurant_instance = models.Restaurant(
+            yelp_business_id= content["yelp_business_id"],
+            name= content["name"],
+            address= content["address"],
+            phone_number= content["phone_number"],
+            menu= menu_instance,
+            categories= content["scraped_data"]["categories"],
+            price= content["price"],
+            rating= content["rating"],
+            business_hours= businessHours_instance,
+            yelp_url= content["yelp_url"],
+        )
+        db.session.add(restaurant_instance)
+        db.session.commit()
 
 def scrape(url: str) -> dict: 
     try:
@@ -152,7 +154,7 @@ def scrape(url: str) -> dict:
 def restaurant_exists(yelp_business_id: str) -> bool:
     return db.session.query(db.exists().where(models.Restaurant.yelp_business_id == yelp_business_id)).scalar()
 
-def update_restaurant(content: dict, scraped_data: dict) -> None:
+def update_restaurant(content: dict) -> None:
     restaurant = models.Restaurant.query.filter_by(yelp_business_id=content["yelp_business_id"]).first()
     if restaurant.name != content["name"]: restaurant.name = content["name"]
     if restaurant.address != content["address"]: restaurant.address = content["address"]
@@ -184,11 +186,11 @@ def update_restaurant(content: dict, scraped_data: dict) -> None:
         restaurant.business_hours.sunday = content["business_hours"][6]
 
     # update menu popular dishes + categories
-    for category in scraped_data["categories"]:
+    for category in content["scraped_data"]["categories"]:
         if not restaurant.categories.includes(category):
             restaurant.categories.append(category)
     
-    for dish in scraped_data["menu"]:
+    for dish in content["scraped_data"]["menu"]:
         if not restaurant.menu.popular_dishes.includes(dish):
             restaurant.menu.popular_dishes.append(dish)
 

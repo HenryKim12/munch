@@ -19,4 +19,8 @@ def getByID(id):
 
 @main.route("/collect", methods=["GET"])
 def collect():
-    return services.fetchRestaurants()
+    try:
+        services.fetchRestaurants()
+        return "Success"
+    except:
+        return "Fail"
