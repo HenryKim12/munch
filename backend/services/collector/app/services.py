@@ -62,7 +62,7 @@ def fetchRestaurants() -> None:
             open_hours = restaurant["business_hours"][0]["open"]
             business_hours = {k: [] for k in range(7)}
             for val in open_hours:
-                daily_hours = f"{val["start"]}-{val["end"]}"
+                daily_hours = f"{val["start"]} - {val["end"]}"
                 business_hours[val["day"]].append(daily_hours)
             content["business_hours"] = business_hours
 
