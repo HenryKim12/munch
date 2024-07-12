@@ -22,5 +22,5 @@ def collect():
     try:
         services.fetchRestaurants()
         return "Success"
-    except:
-        return "Fail"
+    except Exception as error:
+        return str(error)

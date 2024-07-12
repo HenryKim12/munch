@@ -13,11 +13,11 @@ class Restaurant(db.Model):
     name = db.Column(db.String(150), nullable=False, unique=False)
     address = db.Column(db.String(150), nullable=False, unique=False)
     phone_number = db.Column(db.String(20), nullable=False, unique=True)
-    menu = db.relationship('menu', backref='restaurant', uselist=False, cascade="all, delete-orphan")
+    menu = db.relationship('Menu', backref='restaurant', uselist=False, cascade="all, delete-orphan")
     categories = db.Column(ARRAY(db.String), nullable=False, unique=False)
     price = db.Column(db.String(5), nullable=False, unique=False)
     rating = db.Column(db.Float, nullable=False, unique=False)
-    business_hours = db.relationship('business_hours', backref='restaurant', uselist=False, cascade="all, delete-orphan")
+    business_hours = db.relationship('BusinessHours', backref='restaurant', uselist=False, cascade="all, delete-orphan")
     yelp_url = db.Column(db.Text, nullable=False, unique=True)
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp(), nullable=False, unique=False)
     updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), nullable=False, unique=False)
@@ -29,7 +29,7 @@ class BusinessHours(db.Model):
     __tablename__ = 'business_hours'
     __table_args__ = {'schema': os.getenv("SCHEMA")}
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.restaurant.id'), nullable=False, unique=True)
+    restaurant_id = db.Column(db.Integer, db.ForeignKey(f'{os.getenv("SCHEMA")}.restaurant.id'), nullable=False, unique=True)
     monday = db.Column(ARRAY(db.Text), nullable=False, unique=False)
     tuesday = db.Column(ARRAY(db.Text), nullable=False, unique=False)
     wednesday = db.Column(ARRAY(db.Text), nullable=False, unique=False)
@@ -47,7 +47,7 @@ class Menu(db.Model):
     __tablename__ = 'menu'
     __table_args__ = {'schema': os.getenv("SCHEMA")}
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.restaurant.id'), nullable=False, unique=True)
+    restaurant_id = db.Column(db.Integer, db.ForeignKey(f'{os.getenv("SCHEMA")}.restaurant.id'), nullable=False, unique=True)
     url = db.Column(db.String(150), nullable=False, unique=True)
     popular_dishes = db.Column(ARRAY(db.String(150)), nullable=False, unique=False)
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp(), nullable=False, unique=False)

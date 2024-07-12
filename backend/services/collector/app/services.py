@@ -38,6 +38,7 @@ def fetchRestaurants() -> None:
         }
         restaurant_contents = []
         response = requests.get(YELP_API_URL, headers=headers, params=params)
+        # return response.text
         restaurants = response.json()["businesses"]
         for restaurant in restaurants:
             if not (restaurant["url"] and restaurant["rating"] and restaurant["price"] and restaurant["business_hours"] and 
@@ -59,7 +60,7 @@ def fetchRestaurants() -> None:
                 address += val
             content["address"] = address
 
-            open_hours = restaurant["business_hours"]["open"]
+            open_hours = restaurant["business_hours"][0]["open"]
             business_hours = {k: [] for k in range(7)}
             for val in open_hours:
                 daily_hours = f"{val["start"]}-{val["end"]}"
@@ -81,6 +82,7 @@ def fetchRestaurants() -> None:
         update_db(restaurant_contents)
     except Exception as error:
         print(f"[{datetime.now()}] Error while collecting restaurant data: {error}")
+        raise Exception(f"[{datetime.now()}] Error while collecting restaurant data: {error}")
 
 def update_db(restaurant_contents: list[dict]) -> None:
     for content in restaurant_contents:
@@ -90,7 +92,7 @@ def update_db(restaurant_contents: list[dict]) -> None:
             continue
             
         menu_instance = models.Menu(
-                menu_url=content["menu_url"], 
+                url=content["menu_url"], 
                 popular_dishes=content["scraped_data"]["menu"]
             )
         db.session.add(menu_instance)
@@ -129,7 +131,7 @@ def scrape(url: str) -> dict:
         soup = BeautifulSoup(response.text, "html.parser")
         main = soup.find_all("main", id="main-content")[0]
 
-        menu_section = main.find_all("section", attrs={"class": "y-css-rgh890", "aria-label": "Menu"})
+        menu_section = main.find_all("section", attrs={"class": "y-css-rgh890", "aria-label": "Menu"})[0]
         dish_result = []
         dish_tags = menu_section.find_all("p", attrs={"class": "y-css-tnxl0n", "data-font-weight": "bold"})
         for dish_tag in dish_tags:
@@ -145,9 +147,9 @@ def scrape(url: str) -> dict:
             categories_result.append(category)
         data["categories"] = categories_result
 
-    except Exception as error: 
+    except Exception as error:         
         print(f"[{datetime.now()}] Error while scraping yelp restaurant url: {error}")
-        raise Exception(error)
+        raise Exception(f"[{datetime.now()}] Error while scraping yelp restaurant url: {error}")
 
     return data
 
