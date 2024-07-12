@@ -34,11 +34,10 @@ def fetchRestaurants() -> None:
         params = {
             "location": "Vancouver",
             "term": "restaurants",
-            "limit": 3,
+            "limit": 1,
         }
         restaurant_contents = []
         response = requests.get(YELP_API_URL, headers=headers, params=params)
-        # return response.text
         restaurants = response.json()["businesses"]
         for restaurant in restaurants:
             if not (restaurant["url"] and restaurant["rating"] and restaurant["price"] and restaurant["business_hours"] and 
@@ -158,43 +157,71 @@ def restaurant_exists(yelp_business_id: str) -> bool:
 
 def update_restaurant(content: dict) -> None:
     restaurant = models.Restaurant.query.filter_by(yelp_business_id=content["yelp_business_id"]).first()
-    if restaurant.name != content["name"]: restaurant.name = content["name"]
-    if restaurant.address != content["address"]: restaurant.address = content["address"]
-    if restaurant.phone_number != content["phone_number"]: restaurant.phone_number = content["phone_number"]
-    if restaurant.menu.url != content["menu_url"]: restaurant.menu.url = content["menu_url"]
-    if restaurant.price != content["price"]: restaurant.price = content["price"]
-    if restaurant.rating != content["rating"]: restaurant.rating = content["rating"]
-    if restaurant.yelp_url != content["yelp_url"]: restaurant.yelp_url = content["yelp_url"]
 
+    # update restaurants
+    restaurant_updated = False
+    if restaurant.name != content["name"]: 
+        restaurant.name = content["name"]
+        restaurant_updated = True
+    if restaurant.address != content["address"]: 
+        restaurant.address = content["address"]
+        restaurant_updated = True
+    if restaurant.phone_number != content["phone_number"]: 
+        restaurant.phone_number = content["phone_number"]
+        restaurant_updated = True
+    if restaurant.price != content["price"]: 
+        restaurant.price = content["price"]
+        restaurant_updated = True
+    if restaurant.rating != content["rating"]: 
+        restaurant.rating = content["rating"]
+        restaurant_updated = True
+    if restaurant.yelp_url != content["yelp_url"]: 
+        restaurant.yelp_url = content["yelp_url"]
+        restaurant_updated = True
+    for category in content["scraped_data"]["categories"]:
+        if not (category in restaurant.categories):
+            restaurant.categories.append(category)
+            restaurant_updated = True
+    if restaurant_updated:
+        restaurant.updated_at = db.func.current_timestamp()
+
+    # update menus
+    menu_updated = False
+    if restaurant.menu.url != content["menu_url"]: 
+        restaurant.menu.url = content["menu_url"]
+        menu_updated = True
+    for dish in content["scraped_data"]["menu"]:
+        if not (dish in restaurant.menu.popular_dishes):
+            restaurant.menu.popular_dishes.append(dish)
+            menu_updated = True
+    if menu_updated:
+        restaurant.menu.updated_at = db.func.current_timestamp()
+
+    # update business_hours
+    business_hours_updated = False
     if restaurant.business_hours.monday != content["business_hours"][0]: 
         restaurant.business_hours.monday = content["business_hours"][0]
-
+        business_hours_updated = True
     if restaurant.business_hours.tuesday != content["business_hours"][1]: 
         restaurant.business_hours.tuesday = content["business_hours"][1]
-
+        business_hours_updated = True
     if restaurant.business_hours.wednesday != content["business_hours"][2]: 
         restaurant.business_hours.wednesday = content["business_hours"][2]
-
+        business_hours_updated = True
     if restaurant.business_hours.thursday != content["business_hours"][3]: 
         restaurant.business_hours.thursday = content["business_hours"][3]
-
+        business_hours_updated = True
     if restaurant.business_hours.friday != content["business_hours"][4]: 
         restaurant.business_hours.friday = content["business_hours"][4]
-
+        business_hours_updated = True
     if restaurant.business_hours.saturday != content["business_hours"][5]: 
         restaurant.business_hours.saturday = content["business_hours"][5]
-
+        business_hours_updated = True
     if restaurant.business_hours.sunday != content["business_hours"][6]: 
         restaurant.business_hours.sunday = content["business_hours"][6]
-
-    # update menu popular dishes + categories
-    for category in content["scraped_data"]["categories"]:
-        if not restaurant.categories.includes(category):
-            restaurant.categories.append(category)
-    
-    for dish in content["scraped_data"]["menu"]:
-        if not restaurant.menu.popular_dishes.includes(dish):
-            restaurant.menu.popular_dishes.append(dish)
+        business_hours_updated = True
+    if business_hours_updated:
+        restaurant.business_hours.updated_at = db.func.current_timestamp()
 
     db.session.commit()
 

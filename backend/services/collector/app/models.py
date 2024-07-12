@@ -5,6 +5,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# flask db init (only once at beginning)
+# flask db migrate -m "message"
+# flask db upgrade
+
 class Restaurant(db.Model):
     __tablename__ = 'restaurant'
     __table_args__ = {'schema': os.getenv("SCHEMA")}
@@ -13,10 +17,12 @@ class Restaurant(db.Model):
     name = db.Column(db.String(150), nullable=False, unique=False)
     address = db.Column(db.String(150), nullable=False, unique=False)
     phone_number = db.Column(db.String(20), nullable=False, unique=True)
+    menu_id = db.Column(db.Integer, db.ForeignKey(f'{os.getenv("SCHEMA")}.menu.id'), nullable=False, unique=True)
     menu = db.relationship('Menu', backref='restaurant', uselist=False, cascade="all, delete-orphan")
     categories = db.Column(ARRAY(db.String), nullable=False, unique=False)
     price = db.Column(db.String(5), nullable=False, unique=False)
     rating = db.Column(db.Float, nullable=False, unique=False)
+    business_hours_id = db.Column(db.Integer, db.ForeignKey(f'{os.getenv("SCHEMA")}.business_hours.id'), nullable=False, unique=True)
     business_hours = db.relationship('BusinessHours', backref='restaurant', uselist=False, cascade="all, delete-orphan")
     yelp_url = db.Column(db.Text, nullable=False, unique=True)
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp(), nullable=False, unique=False)
