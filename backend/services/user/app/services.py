@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from . import models
 from flask import jsonify
-from extensions import db
+from .extensions import db
 
 load_dotenv()
 
