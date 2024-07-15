@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, request
 from app.extensions import db
 import requests
 import os
@@ -14,8 +14,8 @@ def get():
     return services.get_restaurants()
 
 @main.route('/restaurants/<int:id>', methods=["GET"])
-def getByID(id):
-    return services.get_restaurant_by_id(id)
+def getByID():
+    return services.get_restaurant_by_id(request.args.get("id"))
 
 @main.route("/collect", methods=["GET"])
 def collect():
