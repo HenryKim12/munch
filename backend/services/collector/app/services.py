@@ -1,6 +1,5 @@
 import requests
 import os
-from flask import jsonify, request
 from dotenv import load_dotenv
 from bs4 import BeautifulSoup
 from datetime import datetime
@@ -227,8 +226,8 @@ def update_restaurant(content: dict) -> None:
 
 def get_restaurants():
     restaurants = models.Restaurant.query.all()
-    return jsonify(restaurants)
+    return restaurants
 
 def get_restaurant_by_id(id):
     restaurant = models.Restaurant.get(id)
-    return jsonify(restaurant)
+    return restaurant
