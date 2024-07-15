@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from . import models
 from flask import jsonify
 from .extensions import db
+import bcrypt
 
 load_dotenv()
 
@@ -29,8 +30,10 @@ def create_user(data):
     db.session.commit()
 
 def hash_password(password) -> str:
-    # TODO: implement hashing using bcrypt
-    return password
+    bytes = password.encode('utf-8') 
+    salt = bcrypt.gensalt()
+    hash = bcrypt.hashpw(bytes, salt) 
+    return hash
 
 def update_user(id, data):
     user = models.User.get(id)
