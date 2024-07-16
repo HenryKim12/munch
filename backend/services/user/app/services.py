@@ -9,18 +9,32 @@ load_dotenv()
 
 def get_users():
     users = models.User.query.all()
-    return jsonify(users)
+    response = []
+    for user in users:
+        response.append(user.to_dict())
+    return response
 
 def get_user_by_id(id):
-    user = models.User.get(id)
-    return jsonify(user)
+    user = db.session.get(models.User, id)
+    if not user:
+        raise ValueError("User does not exist.")
+    return user.to_dict()
 
 def delete_user(id):
-    user = models.User.get(id)
+    user = db.session.get(models.User, id)
+    if not user:
+        raise ValueError("User does not exist.")
     db.session.delete(user)
     db.session.commit()
 
 def create_user(data):
+    existingUsername = db.session.query(db.exists().where(models.User.username == data["username"])).scalar()
+    if existingUsername:
+        raise ValueError("Account with given username already exists. Try signing in.")
+    existingEmail = db.session.query(db.exists().where(models.User.email == data["email"])).scalar()
+    if existingEmail:
+        raise ValueError("Account with given email already exists. Try signing in.")
+    
     user = models.User(username= data["username"],
                        email= data["email"],
                        password= hash_password(data["password"]),
@@ -36,7 +50,10 @@ def hash_password(password) -> str:
     return hash
 
 def update_user(id, data):
-    user = models.User.get(id)
+    user = db.session.get(models.User, id)
+    if not user:
+        raise ValueError("User does not exist.")
+    
     if "username" in data:
         user.username = data["username"]
     if "email" in data:
