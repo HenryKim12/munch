@@ -132,9 +132,9 @@ def update_db(restaurant_contents: list[dict]) -> None:
                 continue
                 
             menu_instance = models.Menu(
-                    url=content["menu_url"], 
-                    popular_dishes=content["scraped_data"]["menu"]
-                )
+                url=content["menu_url"], 
+                popular_dishes=content["scraped_data"]["menu"]
+            )
             db.session.add(menu_instance)
 
             businessHours_instance = models.BusinessHours(
