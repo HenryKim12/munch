@@ -1,6 +1,7 @@
 from app import models
 from app.extensions import db
 from sqlalchemy import func
+import json
 
 postData = {
     "username": "test",
@@ -13,19 +14,19 @@ def test_get_users(client):
     assert response.status_code == 200
     assert len(response.get_json()) == models.User.query.count()
 
-# def test_get_user_by_id(client):
-#     user_count = models.User.query.count()
-#     if user_count == 0:
-#         postResponse = client.post("/users", json=postData)
-#         assert postResponse.status_code == 200
-#     db_user = models.User.query.filter_by(email=postData["email"]).first()
-#     response = client.get(f"/users/{db_user.to_dict()["id"]}")
-#     assert response.status_code == 200
-#     user = response.get_json()
-#     assert user["username"] == db_user["username"]
-#     assert user["email"] == db_user["email"]
-#     assert user["password"] == db_user["password"]
-#     assert user["restaurants"] == db_user["restaurants"]
+def test_get_user_by_id(client):
+    user_count = models.User.query.count()
+    if user_count == 0:
+        postResponse = client.post("/users", json=postData)
+        assert postResponse.status_code == 200
+    db_user = models.User.query.filter_by(email=postData["email"]).first()
+    response = client.get(f"/users/{db_user.to_dict()["id"]}")
+    assert response.status_code == 200
+    user = response.get_json()
+    assert user["username"] == db_user["username"]
+    assert user["email"] == db_user["email"]
+    assert user["password"] == db_user["password"]
+    assert user["restaurants"] == db_user["restaurants"]
 
 # def test_delete_user(client):
 #     user_count = models.User.query.count()

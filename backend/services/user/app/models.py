@@ -29,6 +29,9 @@ class User(db.Model):
             "restaurants": self.restaurants
         }
 
+    def __getitem__(self, key):
+        return self.__dict__[key]
+
 class UserRestaurant(db.Model):
     __tablename__ = 'user_restaurant'
     __table_args__ = {'schema': os.getenv("USER_SCHEMA"), 'extend_existing': True}
