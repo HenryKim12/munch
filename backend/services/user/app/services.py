@@ -30,11 +30,9 @@ def delete_user(id):
 
 def create_user(data):
     existingUsername = db.session.query(db.exists().where(models.User.username == data["username"])).scalar()
-    if existingUsername:
-        raise ValueError("Account with given username already exists. Try signing in.")
     existingEmail = db.session.query(db.exists().where(models.User.email == data["email"])).scalar()
-    if existingEmail:
-        raise ValueError("Account with given email already exists. Try signing in.")
+    if existingUsername or existingEmail:
+        raise ValueError("Account with given username/email already exists. Try signing in.")
     
     user = models.User(username= data["username"],
                        email= data["email"],
