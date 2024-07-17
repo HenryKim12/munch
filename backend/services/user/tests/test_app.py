@@ -27,6 +27,11 @@ def test_get_user_by_id(client):
     assert user["password"] == db_user["password"]
     assert user["restaurants"] == db_user["restaurants"]
 
+def test_get_user_by_missing_id(client):
+    response = client.get("/users/0")
+    assert response.status_code == 404
+    assert response.get_json() == "User does not exist."
+
 def test_delete_user(client):
     existing_user = models.User.query.filter_by(email=postData["email"]).first()
     user_id = None
@@ -40,6 +45,11 @@ def test_delete_user(client):
     assert response.status_code == 200
     checkUserDeleted = db.session.query(db.exists().where(models.User.email == postData["email"])).scalar()
     assert checkUserDeleted == False
+
+def test_delete_missing_user(client):
+    response = client.delete("users/0")
+    assert response.status_code == 404
+    assert response.get_json() == "User does not exist."
 
 # def test_create_new_user(client):
 #     existing_user = db.session.query(db.exists().where(models.User.username == postData["username"])).scalar()
