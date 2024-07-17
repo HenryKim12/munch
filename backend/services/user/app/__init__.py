@@ -1,12 +1,13 @@
 from flask import Flask
-from config import Config
-from app.extensions import db
 from dotenv import load_dotenv
-from . import routes
 from flask_migrate import Migrate
 from flask_cors import CORS
+from config import Config
+from app.extensions import db
+from app import routes
 
 import os
+
 load_dotenv()
 
 def create_app(config=Config):

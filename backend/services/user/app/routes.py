@@ -1,8 +1,9 @@
 from flask import Blueprint, request, jsonify
 from app.extensions import db
-import os
 from dotenv import load_dotenv
-from . import models, services
+from app import models, services
+
+import os
 
 load_dotenv()
 

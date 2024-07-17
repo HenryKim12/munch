@@ -1,13 +1,14 @@
 from app.extensions import db
 from sqlalchemy.dialects.postgresql import ARRAY
-import os 
 from dotenv import load_dotenv
+
+import os 
 
 load_dotenv()
 
 class User(db.Model):
     __tablename__ = 'usr'
-    __table_args__ = {'schema': os.getenv("USER_SCHEMA")}
+    __table_args__ = {'schema': os.getenv("USER_SCHEMA"), 'extend_existing': True}
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
@@ -29,8 +30,8 @@ class User(db.Model):
         }
 
 class UserRestaurant(db.Model):
-    __tablename__ = 'user_restaurants'
-    __table_args__ = {'schema': os.getenv("USER_SCHEMA")}
+    __tablename__ = 'user_restaurant'
+    __table_args__ = {'schema': os.getenv("USER_SCHEMA"), 'extend_existing': True}
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey(f'{os.getenv("USER_SCHEMA")}.usr.id'), nullable=False)  
     restaurant_id = db.Column(db.Integer, nullable=False)

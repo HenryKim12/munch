@@ -1,8 +1,9 @@
-import os
 from dotenv import load_dotenv
-from . import models
+from app import models
 from flask import jsonify
-from .extensions import db
+from app.extensions import db
+
+import os
 import bcrypt
 
 load_dotenv()
