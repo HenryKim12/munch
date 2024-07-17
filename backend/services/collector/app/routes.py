@@ -22,13 +22,15 @@ def getByID():
     try:
         restaurant = services.get_restaurant_by_id(request.args.get("id"))
         return jsonify(restaurant), 200
+    except ValueError as e:
+        return jsonify(str(e)), 404
     except Exception as e:
         return jsonify(str(e)), 400
 
 @main.route("/collect", methods=["GET"])
 def collect():
     try:
-        services.fetchRestaurants()
+        services.data_pipeline("Vancouver")
         return jsonify("Successfully fetched and updated restaurant data")
     except Exception as e:
         return jsonify(str(e))
