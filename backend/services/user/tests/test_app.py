@@ -1,7 +1,6 @@
 from app import models
 from app.extensions import db
 from sqlalchemy import func
-import json
 
 postData = {
     "username": "test",
@@ -28,14 +27,19 @@ def test_get_user_by_id(client):
     assert user["password"] == db_user["password"]
     assert user["restaurants"] == db_user["restaurants"]
 
-# def test_delete_user(client):
-#     user_count = models.User.query.count()
-#     if user_count == 0:
-#         postResponse = client.post("/users", json=postData)
-#         assert postResponse.status_code == 200
-
-#     response = client.delete("/users/1")
-#     assert response.status_code == 200
+def test_delete_user(client):
+    existing_user = models.User.query.filter_by(email=postData["email"]).first()
+    user_id = None
+    if not existing_user:
+        postResponse = client.post("/users", json=postData)
+        assert postResponse.status_code == 200
+        user_id = db.session.get(models.User, db.session.query(func.max(models.User.id)))
+    else:
+        user_id = existing_user["id"]
+    response = client.delete(f"/users/{user_id}")
+    assert response.status_code == 200
+    checkUserDeleted = db.session.query(db.exists().where(models.User.email == postData["email"])).scalar()
+    assert checkUserDeleted == False
 
 # def test_create_new_user(client):
 #     existing_user = db.session.query(db.exists().where(models.User.username == postData["username"])).scalar()
