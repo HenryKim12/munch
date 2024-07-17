@@ -14,12 +14,12 @@ def test_get_users(client):
     assert len(response.get_json()) == models.User.query.count()
 
 def test_get_user_by_id(client):
-    user_count = models.User.query.count()
-    if user_count == 0:
+    checkUser = db.session.query(db.exists().where(models.User.email == postData["email"])).scalar()
+    if not checkUser:
         postResponse = client.post("/users", json=postData)
         assert postResponse.status_code == 200
     db_user = models.User.query.filter_by(email=postData["email"]).first()
-    response = client.get(f"/users/{db_user.to_dict()["id"]}")
+    response = client.get(f"/users/{db_user["id"]}")
     assert response.status_code == 200
     user = response.get_json()
     assert user["username"] == db_user["username"]
@@ -38,7 +38,7 @@ def test_delete_user(client):
     if not existing_user:
         postResponse = client.post("/users", json=postData)
         assert postResponse.status_code == 200
-        user_id = db.session.get(models.User, db.session.query(func.max(models.User.id)))
+        user_id = db.session.get(models.User, db.session.query(func.max(models.User.id)).scalar())
     else:
         user_id = existing_user["id"]
     response = client.delete(f"/users/{user_id}")
@@ -52,7 +52,7 @@ def test_delete_missing_user(client):
     assert response.get_json() == "User does not exist."
 
 def test_create_new_user(client):
-    existing_user = db.session.query(db.exists().where(models.User.username == postData["username"])).scalar()
+    existing_user = models.User.query.filter_by(email=postData["email"]).first()
     if existing_user:
         del_response = client.delete(f"/users/{existing_user.to_dict()["id"]}")
         assert del_response.status_code == 200
