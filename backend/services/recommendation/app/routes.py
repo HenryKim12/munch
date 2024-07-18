@@ -8,7 +8,7 @@ load_dotenv()
 
 main = Blueprint('main', __name__)
 
-@main.route('/users', methods=["GET"])
+@main.route('/recommend', methods=["GET"])
 def get():
     try:
         
