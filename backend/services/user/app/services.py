@@ -63,3 +63,16 @@ def update_user(id, data):
         for restaurant in data["restaurants"]:
             user.restaurants.append(restaurant)
     db.session.commit()
+
+def add_user_restaurant(data):
+    user_restaurant = models.UserRestaurant(
+        user_id = data["user_id"],
+        restaurant_id=data["restaurant_id"],
+        rating=data["rating"]
+    )
+    db.session.add(user_restaurant)
+    db.session.commit()
+
+def get_user_restaurants():
+    pass
+

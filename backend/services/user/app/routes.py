@@ -61,3 +61,12 @@ def update(id):
         return jsonify(str(e)), 404
     except Exception as e:
         return jsonify(str(e)), 400
+    
+@main.route('/users/restaurants', methods=["POST"])
+def post_user_restaurant():
+    try:
+        data = request.get_json()
+        services.add_user_restaurant(data)
+        return jsonify(f"Successfully added restaurant rating"), 200
+    except Exception as e:
+        return jsonify(str(e)), 400

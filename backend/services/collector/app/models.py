@@ -33,7 +33,7 @@ class BusinessHours(db.Model):
     __tablename__ = 'business_hours'
     __table_args__ = {'schema': os.getenv("SCHEMA")}
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    restaurant_id = db.Column(db.Integer, db.ForeignKey(f'{os.getenv("SCHEMA")}.restaurant.id'), nullable=False, unique=True)
+    restaurant_id = db.Column(db.Integer, db.ForeignKey(f'{os.getenv("SCHEMA")}.restaurant.id', ondelete='CASCADE', onupdate='CASCADE'), nullable=False, unique=True)
     monday = db.Column(ARRAY(db.Text), nullable=True, unique=False)
     tuesday = db.Column(ARRAY(db.Text), nullable=True, unique=False)
     wednesday = db.Column(ARRAY(db.Text), nullable=True, unique=False)
@@ -51,7 +51,7 @@ class Menu(db.Model):
     __tablename__ = 'menu'
     __table_args__ = {'schema': os.getenv("SCHEMA")}
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    restaurant_id = db.Column(db.Integer, db.ForeignKey(f'{os.getenv("SCHEMA")}.restaurant.id'), nullable=False, unique=True)
+    restaurant_id = db.Column(db.Integer, db.ForeignKey(f'{os.getenv("SCHEMA")}.restaurant.id', ondelete='CASCADE', onupdate='CASCADE'), nullable=False, unique=True)
     url = db.Column(db.String(150), nullable=False, unique=False)
     popular_dishes = db.Column(ARRAY(db.String(150)), nullable=False, unique=False)
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp(), nullable=False, unique=False)
