@@ -1,0 +1,1564 @@
+[
+    {
+        "yelp_business_id": "NdEPf2Ls5Ql3_nkwjqKvXA",
+        "name": "The Flying Pig",
+        "phone_number": "+1 604-568-1344",
+        "menu_url": "https://theflyingpigvan.com/menu/",
+        "price": "$$",
+        "rating": 4.0,
+        "yelp_url": "https://www.yelp.com/biz/the-flying-pig-vancouver-5?adjust_creative=SuhzlSss_Ymp7bpjhwEWSA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=SuhzlSss_Ymp7bpjhwEWSA",
+        "address": "1168 Hamilton StreetUnit 104Vancouver, BC V6B 2S2Canada",
+        "business_hours": {
+            "0": [
+                "1500 - 0000"
+            ],
+            "1": [
+                "1500 - 0000"
+            ],
+            "2": [
+                "1500 - 0000"
+            ],
+            "3": [
+                "1500 - 0000"
+            ],
+            "4": [
+                "1200 - 0000"
+            ],
+            "5": [
+                "1200 - 0000"
+            ],
+            "6": [
+                "1200 - 2200"
+            ]
+        },
+        "scraped_data": {
+            "menu": [
+                "Short Rib",
+                "Pulled Pork Poutine",
+                "Salmon Cakes",
+                "Wild Seafood Pappardelle",
+                "Lobster Risotto",
+                "Wine Braised Beef",
+                "Pork Chop",
+                "Prawn Risotto",
+                "Blackened Steelhead Trout",
+                "Beet Salad",
+                "Crispy Brussel",
+                "Truffle Mac",
+                "Beef Carpaccio",
+                "Caesar Salad",
+                "Pork Belly",
+                "Pork Rack",
+                "Roasted Bone Marrow",
+                "Truffled Jumbo Macaroni",
+                "French Toast",
+                "Roasted Half Chicken"
+            ],
+            "categories": [
+                "vegan friendly",
+                "trendy restaurants",
+                "restaurants good for groups",
+                "dinner restaurants",
+                "happy hour specials",
+                "restaurants"
+            ]
+        }
+    },
+    {
+        "yelp_business_id": "4EV_ZcQmjAmP3pmO-_nb2A",
+        "name": "Miku",
+        "phone_number": "+1 604-568-3900",
+        "menu_url": "https://mikurestaurant.com/menu-main",
+        "price": "$$$",
+        "rating": 4.4,
+        "yelp_url": "https://www.yelp.com/biz/miku-vancouver-2?adjust_creative=SuhzlSss_Ymp7bpjhwEWSA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=SuhzlSss_Ymp7bpjhwEWSA",
+        "address": "200 Granville StreetSuite 70Vancouver, BC V6C 1S4Canada",
+        "business_hours": {
+            "0": [
+                "1130 - 2200"
+            ],
+            "1": [
+                "1130 - 2200"
+            ],
+            "2": [
+                "1130 - 2200"
+            ],
+            "3": [
+                "1130 - 2200"
+            ],
+            "4": [
+                "1130 - 2200"
+            ],
+            "5": [
+                "1200 - 2200"
+            ],
+            "6": [
+                "1200 - 2200"
+            ]
+        },
+        "scraped_data": {
+            "menu": [
+                "Salmon Oshi Roll",
+                "Green Tea Opera Cake",
+                "Ebi Fritters",
+                "Red Wave Roll",
+                "Aburi Oshi Sushi",
+                "Salmon Aburi Sushi",
+                "Ebi Oshi",
+                "Aburi Beef Carpaccio",
+                "Aburi Prime",
+                "Aburi Chirashi",
+                "Sushi Lunch",
+                "Sockeye Salmon",
+                "Premium Sushi",
+                "Pressed Sushi",
+                "Seaweed Salad",
+                "Saba Oshi Sushi",
+                "Aburi Style Sushi",
+                "Flame Seared Aburi",
+                "Tofu Salad",
+                "Aburi Oshi Rolls"
+            ],
+            "categories": [
+                "vegan friendly",
+                "catering",
+                "restaurants good for groups",
+                "dinner restaurants",
+                "dine-in restaurants",
+                "happy hour specials"
+            ]
+        }
+    },
+    {
+        "yelp_business_id": "OHMv-_cc0kmRCWV3kM44Bg",
+        "name": "Kosoo",
+        "phone_number": "+1 604-428-8414",
+        "menu_url": "https://kosoo.ca/kosoo-special-memu/",
+        "price": "$$",
+        "rating": 4.3,
+        "yelp_url": "https://www.yelp.com/biz/kosoo-vancouver?adjust_creative=SuhzlSss_Ymp7bpjhwEWSA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=SuhzlSss_Ymp7bpjhwEWSA",
+        "address": "1128 Robson StreetVancouver, BC V6E 1B2Canada",
+        "business_hours": {
+            "0": [
+                "1130 - 1500",
+                "1700 - 2300"
+            ],
+            "1": [
+                "1130 - 1500",
+                "1700 - 2300"
+            ],
+            "2": [
+                "1130 - 1500",
+                "1700 - 2300"
+            ],
+            "3": [
+                "1130 - 1500",
+                "1700 - 2300"
+            ],
+            "4": [
+                "1130 - 1500",
+                "1700 - 2300"
+            ],
+            "5": [
+                "1130 - 1500",
+                "1700 - 2300"
+            ],
+            "6": [
+                "1130 - 1500",
+                "1700 - 2300"
+            ]
+        },
+        "scraped_data": {
+            "menu": [
+                "Fried Chicken",
+                "Deep Fried Rice Cakes",
+                "Potato and Rice Cake",
+                "Soy Garlic Chicken",
+                "Kimchi Fried Rice",
+                "Boneless Chicken",
+                "Beef Galbi Short Ribs",
+                "Mushroom Bulgogi",
+                "Short Rib Stew",
+                "Honey Butter Chicken",
+                "Geongol",
+                "La Galbi",
+                "Kimchi Jjigae",
+                "Spicy Tofu Soup",
+                "Creamy Pa Dak",
+                "Ox Knee Soup",
+                "Ox Bone Soup",
+                "Supreme Chicken",
+                "Yangnyeom Chicken",
+                "Tteokbokki"
+            ],
+            "categories": [
+                "casual restaurants",
+                "trendy restaurants",
+                "restaurants good for groups",
+                "dinner restaurants",
+                "dine-in restaurants",
+                "restaurants"
+            ]
+        }
+    },
+    {
+        "yelp_business_id": "Ufhxnrt_OJu4jHfVTP3aRQ",
+        "name": "Fanny Bay Oyster Bar & Shellfish Market",
+        "phone_number": "+1 778-379-9510",
+        "menu_url": "http://fannybayoysters.com/uploads/pdf/fbobmenu2024website.pdf",
+        "price": "$$$",
+        "rating": 4.4,
+        "yelp_url": "https://www.yelp.com/biz/fanny-bay-oyster-bar-and-shellfish-market-vancouver?adjust_creative=SuhzlSss_Ymp7bpjhwEWSA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=SuhzlSss_Ymp7bpjhwEWSA",
+        "address": "762 Cambie StVancouver, BC V6B 2P2Canada",
+        "business_hours": {
+            "0": [
+                "1400 - 2200"
+            ],
+            "1": [
+                "1400 - 2200"
+            ],
+            "2": [
+                "1400 - 2200"
+            ],
+            "3": [
+                "1400 - 2200"
+            ],
+            "4": [
+                "1400 - 2200"
+            ],
+            "5": [
+                "1400 - 2200"
+            ],
+            "6": [
+                "1400 - 2200"
+            ]
+        },
+        "scraped_data": {
+            "menu": [
+                "Scallops and Pork Belly",
+                "Clam Chowder",
+                "Fish Tacos",
+                "Dungeness Crab",
+                "Geoduck Sashimi",
+                "Sablefish Collars",
+                "Featured Oyster",
+                "Squid Ink Pasta",
+                "Tuna Tartare",
+                "Lobster Rolls",
+                "West Coast Seafood Boil",
+                "Kumamoto",
+                "Featured Premium Oyster",
+                "Grilled Oysters",
+                "Lobster Poutine",
+                "Kusshi",
+                "Octopus",
+                "Fat Bastard",
+                "Kid's Caesar Salad",
+                "Calamari"
+            ],
+            "categories": [
+                "classy restaurants",
+                "casual restaurants",
+                "catering",
+                "restaurants good for groups",
+                "lunch restaurants",
+                "dinner restaurants"
+            ]
+        }
+    },
+    {
+        "yelp_business_id": "GmEeIcJ9vR04kxzYgPMEgg",
+        "name": "Guu with Garlic",
+        "phone_number": "+1 604-685-8678",
+        "menu_url": "https://guu-izakaya.com/Menu-Garlic",
+        "price": "$$",
+        "rating": 4.3,
+        "yelp_url": "https://www.yelp.com/biz/guu-with-garlic-vancouver-2?adjust_creative=SuhzlSss_Ymp7bpjhwEWSA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=SuhzlSss_Ymp7bpjhwEWSA",
+        "address": "1698 Robson StreetVancouver, BC V6G 1C7Canada",
+        "business_hours": {
+            "0": [
+                "1130 - 1430",
+                "1700 - 2330"
+            ],
+            "1": [
+                "1130 - 1430",
+                "1700 - 2330"
+            ],
+            "2": [
+                "1130 - 1430",
+                "1700 - 2330"
+            ],
+            "3": [
+                "1130 - 1430",
+                "1700 - 2330"
+            ],
+            "4": [
+                "1130 - 1430",
+                "1700 - 0100"
+            ],
+            "5": [
+                "1130 - 0030"
+            ],
+            "6": [
+                "1130 - 2330"
+            ]
+        },
+        "scraped_data": {
+            "menu": [
+                "Beef Tongue",
+                "Tuna Tataki",
+                "Salmon Carpaccio",
+                "Yaki Udon",
+                "Ebi Mayo",
+                "Beef Tataki",
+                "Black Cod",
+                "Okonomiyaki",
+                "Takoyaki",
+                "Pork Belly",
+                "Sashimi Salad",
+                "Kabocha Croquette",
+                "Kimchi Udon",
+                "Chicken Karaage",
+                "Almond Tofu",
+                "Hot Stone Pot",
+                "Chicken Wings",
+                "Grilled Squid",
+                "Unagi Stone Bowls",
+                "Udon Noodles"
+            ],
+            "categories": [
+                "outdoor seating",
+                "casual restaurants",
+                "restaurants good for groups",
+                "dinner restaurants",
+                "dine-in restaurants",
+                "restaurants"
+            ]
+        }
+    },
+    {
+        "yelp_business_id": "iid0VenH7rIp3AWuyQAAHw",
+        "name": "Saku",
+        "phone_number": "+1 778-379-5872",
+        "menu_url": "https://www.sakuvancouver.com/menus",
+        "price": "$$",
+        "rating": 4.4,
+        "yelp_url": "https://www.yelp.com/biz/saku-vancouver-9?adjust_creative=SuhzlSss_Ymp7bpjhwEWSA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=SuhzlSss_Ymp7bpjhwEWSA",
+        "address": "1588 Robson StreetVancouver, BC V6G 2G5Canada",
+        "business_hours": {
+            "0": [
+                "1130 - 1500",
+                "1700 - 2130"
+            ],
+            "1": [
+                "1130 - 1500",
+                "1700 - 2130"
+            ],
+            "2": [
+                "1130 - 1500",
+                "1700 - 2130"
+            ],
+            "3": [
+                "1130 - 1500",
+                "1700 - 2130"
+            ],
+            "4": [
+                "1130 - 2130"
+            ],
+            "5": [
+                "1130 - 2130"
+            ],
+            "6": [
+                "1130 - 2130"
+            ]
+        },
+        "scraped_data": {
+            "menu": [
+                "Cheese Katsu",
+                "Hire Katsu",
+                "Rosu Katsu",
+                "Zenbu Katsu",
+                "Curry Katsu",
+                "Pork Katsu",
+                "Cabbage Salad",
+                "Pork Cutlet",
+                "Pork Fillet",
+                "Katsu Nabe",
+                "Chicken Thigh Katsu",
+                "Pork Loin",
+                "Jumbo Ebi",
+                "Miso Katsu",
+                "Hire Curry",
+                "Curry Udon",
+                "Potato Croquettes",
+                "Kake Udon",
+                "Crispy Fried Chicken",
+                "Udon Noodles"
+            ],
+            "categories": [
+                "vegan friendly",
+                "outdoor seating",
+                "hipster restaurants",
+                "casual restaurants",
+                "trendy restaurants",
+                "restaurants good for groups"
+            ]
+        }
+    },
+    {
+        "yelp_business_id": "SIdbZcE5gp63UjRN8tLr0g",
+        "name": "The Red Accordion",
+        "phone_number": "+1 604-428-6464",
+        "menu_url": "https://www.theredaccordion.com/food-menu",
+        "price": "$$",
+        "rating": 4.7,
+        "yelp_url": "https://www.yelp.com/biz/the-red-accordion-vancouver?adjust_creative=SuhzlSss_Ymp7bpjhwEWSA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=SuhzlSss_Ymp7bpjhwEWSA",
+        "address": "1616 Alberni StreetVancouver, BC V6G 1A6Canada",
+        "business_hours": {
+            "0": [
+                "1200 - 0000"
+            ],
+            "1": [
+                "1200 - 0000"
+            ],
+            "2": [
+                "1200 - 0000"
+            ],
+            "3": [
+                "1200 - 0000"
+            ],
+            "4": [
+                "1200 - 0100"
+            ],
+            "5": [
+                "1000 - 0100"
+            ],
+            "6": [
+                "1000 - 0000"
+            ]
+        },
+        "scraped_data": {
+            "menu": [
+                "Savoury Dutch Baby",
+                "Edamame Hummus",
+                "Chicken Wings",
+                "Haida Gwaii Humboldt Squid",
+                "Aint No Thang Wings",
+                "Tra Burger",
+                "Brussels"
+            ],
+            "categories": [
+                "outdoor seating",
+                "casual nightlife",
+                "trendy nightlife",
+                "romantic nightlife",
+                "classy nightlife",
+                "dine-in restaurants"
+            ]
+        }
+    },
+    {
+        "yelp_business_id": "t-soDjOlN6XkySHBdhRkKA",
+        "name": "Forage",
+        "phone_number": "+1 604-661-1400",
+        "menu_url": "http://www.foragevancouver.com/#menus",
+        "price": "$$",
+        "rating": 4.1,
+        "yelp_url": "https://www.yelp.com/biz/forage-vancouver?adjust_creative=SuhzlSss_Ymp7bpjhwEWSA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=SuhzlSss_Ymp7bpjhwEWSA",
+        "address": "1300 Robson StreetVancouver, BC V6E 1C5Canada",
+        "business_hours": {
+            "0": [
+                "0700 - 1100",
+                "1600 - 2100"
+            ],
+            "1": [
+                "0700 - 1100",
+                "1600 - 2100"
+            ],
+            "2": [
+                "0700 - 1100",
+                "1600 - 2100"
+            ],
+            "3": [
+                "0700 - 1100",
+                "1600 - 2100"
+            ],
+            "4": [
+                "0700 - 1100",
+                "1600 - 2100"
+            ],
+            "5": [
+                "0700 - 1400",
+                "1600 - 2100"
+            ],
+            "6": [
+                "0700 - 1400",
+                "1600 - 2100"
+            ]
+        },
+        "scraped_data": {
+            "menu": [
+                "French Toast",
+                "Grilled Kale Salad",
+                "Seafood Chowder",
+                "Turkey Sausage",
+                "Eggs Benedict",
+                "Quinoa Kale Salads",
+                "Bison Steak",
+                "Award Winning BBQ Duck Chowder",
+                "Pork Belly",
+                "Bison Carpaccio",
+                "Pork Jowl Carbonara",
+                "Heirloom Tomato Salad",
+                "Soft Poached Egg",
+                "Two Rivers Turkey",
+                "Eggs Benny",
+                "Deep Fried Pork Cutlet",
+                "Halibut Cheeks",
+                "Kale Chips",
+                "Game Burger",
+                "Shrimp Clam Chowder"
+            ],
+            "categories": [
+                "vegan friendly",
+                "outdoor seating",
+                "catering",
+                "restaurants good for groups",
+                "dinner restaurants",
+                "brunch restaurants"
+            ]
+        }
+    },
+    {
+        "yelp_business_id": "QzZfjFBnqtBZUUFlWVCd5w",
+        "name": "Botanist",
+        "phone_number": "+1 604-695-5500",
+        "menu_url": "http://www.botanistrestaurant.com/menu/",
+        "price": "$$$",
+        "rating": 4.3,
+        "yelp_url": "https://www.yelp.com/biz/botanist-vancouver-2?adjust_creative=SuhzlSss_Ymp7bpjhwEWSA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=SuhzlSss_Ymp7bpjhwEWSA",
+        "address": "1038 Canada PlaceVancouver, BC V6C 0B9Canada",
+        "business_hours": {
+            "0": [],
+            "1": [
+                "1730 - 2200"
+            ],
+            "2": [
+                "1730 - 2200"
+            ],
+            "3": [
+                "1730 - 2200"
+            ],
+            "4": [
+                "1730 - 2200"
+            ],
+            "5": [
+                "1100 - 1400",
+                "1730 - 2200"
+            ],
+            "6": [
+                "1100 - 1400"
+            ]
+        },
+        "scraped_data": {
+            "menu": [
+                "Duck Breast",
+                "Pan Seared Scallops",
+                "French Toast",
+                "Crab and Avocado Benedict",
+                "Beef Tartare",
+                "Avocado Toast",
+                "Eggs Benedict",
+                "Burrata Salad",
+                "Charred Octopus",
+                "Olive Oil Poached Halibut",
+                "Sous Vide Poached Eggs",
+                "Dry Aged Duck",
+                "Salt Roasted Beet Salad",
+                "Wagyu Burger",
+                "Butter Poached Lobster",
+                "Meyer Lemon Cake",
+                "Wagyu Beef Steak",
+                "Salmon Tartine",
+                "Seared Sablefish",
+                "Foraged Mushroom Tagliatelle"
+            ],
+            "categories": [
+                "vegan friendly",
+                "trendy restaurants",
+                "classy restaurants",
+                "restaurants good for groups",
+                "lunch restaurants",
+                "dinner restaurants"
+            ]
+        }
+    },
+    {
+        "yelp_business_id": "S-wgeQmV5v4g4wti05zUlQ",
+        "name": "Tendon Kohaku",
+        "phone_number": "+1 604-416-3936",
+        "menu_url": "http://www.kohakutendon.com/menu/",
+        "price": "$$",
+        "rating": 4.3,
+        "yelp_url": "https://www.yelp.com/biz/tendon-kohaku-vancouver?adjust_creative=SuhzlSss_Ymp7bpjhwEWSA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=SuhzlSss_Ymp7bpjhwEWSA",
+        "address": "840 Howe StreetSuite 190Vancouver, BC V6Z 2S9Canada",
+        "business_hours": {
+            "0": [
+                "1130 - 2200"
+            ],
+            "1": [
+                "1130 - 2200"
+            ],
+            "2": [
+                "1130 - 2200"
+            ],
+            "3": [
+                "1130 - 2200"
+            ],
+            "4": [
+                "1130 - 2200"
+            ],
+            "5": [
+                "1130 - 2200"
+            ],
+            "6": [
+                "1130 - 2200"
+            ]
+        },
+        "scraped_data": {
+            "menu": [
+                "Anago Tendon",
+                "Rice Bowls",
+                "Chawanmushi",
+                "Ebi Tendon",
+                "Nagoya Chicken Wings",
+                "Prawn Tempura",
+                "Tempura Bowls",
+                "Seafood Tendon",
+                "Steamed Egg",
+                "Vegetable Tendon",
+                "Shrimp Tempura",
+                "Tempura Udon",
+                "Kohaku Udon",
+                "Spicy Udon Soup",
+                "Kabocha Salad",
+                "Ikura",
+                "Soft Fried Egg",
+                "Classic Tendon",
+                "Egg Tempura",
+                "Matcha Soft Serve"
+            ],
+            "categories": [
+                "vegan friendly",
+                "outdoor seating",
+                "casual restaurants",
+                "trendy restaurants",
+                "dinner restaurants",
+                "dine-in restaurants"
+            ]
+        }
+    },
+    {
+        "yelp_business_id": "p5thThuUITUjAy8gS3sPMw",
+        "name": "Fable Kitchen",
+        "phone_number": "+1 604-732-1322",
+        "menu_url": "http://qrco.de/fabledinner",
+        "price": "$$",
+        "rating": 4.3,
+        "yelp_url": "https://www.yelp.com/biz/fable-kitchen-vancouver-2?adjust_creative=SuhzlSss_Ymp7bpjhwEWSA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=SuhzlSss_Ymp7bpjhwEWSA",
+        "address": "1944 W 4th AvenueVancouver, BC V6J 1M5Canada",
+        "business_hours": {
+            "0": [
+                "1100 - 1400",
+                "1700 - 2100"
+            ],
+            "1": [
+                "1100 - 1400",
+                "1700 - 2100"
+            ],
+            "2": [
+                "1100 - 1400",
+                "1700 - 2100"
+            ],
+            "3": [
+                "1100 - 1400",
+                "1700 - 2200"
+            ],
+            "4": [
+                "1000 - 1400",
+                "1700 - 2200"
+            ],
+            "5": [
+                "0900 - 1400",
+                "1700 - 2200"
+            ],
+            "6": [
+                "0900 - 1400",
+                "1700 - 2100"
+            ]
+        },
+        "scraped_data": {
+            "menu": [
+                "Chickpea Fritters",
+                "Pulled Pork Johnny Cakes",
+                "Duck Meatball",
+                "Lemon Meringue Parfait",
+                "Smoked Duck Breast",
+                "Eggs Benedict",
+                "Pork Belly",
+                "French Toast",
+                "Scrambled Eggs",
+                "Tomato Soup",
+                "Steak Frites",
+                "Spaghetti and Meatballs",
+                "Mason Jar",
+                "Ling Cod",
+                "Flat Iron Steak",
+                "Eggs Benny Special Ham",
+                "Potato Crusted Chicken",
+                "Poached Eggs",
+                "Onion Gnocchi",
+                "Beet Salad"
+            ],
+            "categories": [
+                "pescatarian options",
+                "vegan friendly",
+                "outdoor seating",
+                "trendy restaurants",
+                "catering",
+                "restaurants good for groups"
+            ]
+        }
+    },
+    {
+        "yelp_business_id": "_4R46MNkwx9MeOyt0YfNxA",
+        "name": "Chambar",
+        "phone_number": "+1 604-879-7119",
+        "menu_url": "http://www.chambar.com/menu/",
+        "price": "$$",
+        "rating": 4.2,
+        "yelp_url": "https://www.yelp.com/biz/chambar-vancouver?adjust_creative=SuhzlSss_Ymp7bpjhwEWSA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=SuhzlSss_Ymp7bpjhwEWSA",
+        "address": "568 Beatty StreetVancouver, BC V6B 2L3Canada",
+        "business_hours": {
+            "0": [
+                "1700 - 2200"
+            ],
+            "1": [
+                "1700 - 2200"
+            ],
+            "2": [
+                "1700 - 2200"
+            ],
+            "3": [
+                "1700 - 2200"
+            ],
+            "4": [
+                "1700 - 2200"
+            ],
+            "5": [
+                "0900 - 1500",
+                "1700 - 2200"
+            ],
+            "6": [
+                "0900 - 1500",
+                "1700 - 2200"
+            ]
+        },
+        "scraped_data": {
+            "menu": [
+                "Moules Frites",
+                "White Chocolate Pistachio",
+                "Lamb Shank",
+                "Bon Matin",
+                "Tajine",
+                "Duck Breast",
+                "Braised Short Ribs",
+                "Tomato Coconut Mussels",
+                "Steak and Eggs",
+                "Mixed Berry Compote",
+                "Braised Lamb",
+                "Smoked Chili",
+                "French Toast",
+                "Arctic Char",
+                "Lamb Tagine",
+                "Chimichurri"
+            ],
+            "categories": [
+                "vegan friendly",
+                "outdoor seating",
+                "trendy restaurants",
+                "classy restaurants",
+                "restaurants good for groups",
+                "dinner restaurants"
+            ]
+        }
+    },
+    {
+        "yelp_business_id": "gt1BSfVFvzI-qHdJ3LUZug",
+        "name": "Blue Water Cafe",
+        "phone_number": "+1 604-688-8078",
+        "menu_url": "http://www.bluewatercafe.net/food/",
+        "price": "$$$$",
+        "rating": 4.4,
+        "yelp_url": "https://www.yelp.com/biz/blue-water-cafe-vancouver?adjust_creative=SuhzlSss_Ymp7bpjhwEWSA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=SuhzlSss_Ymp7bpjhwEWSA",
+        "address": "1095 Hamilton StVancouver, BC V6B 5T4Canada",
+        "business_hours": {
+            "0": [
+                "1630 - 2200"
+            ],
+            "1": [
+                "1630 - 2200"
+            ],
+            "2": [
+                "1630 - 2200"
+            ],
+            "3": [
+                "1630 - 2330"
+            ],
+            "4": [
+                "1630 - 2330"
+            ],
+            "5": [
+                "1630 - 2330"
+            ],
+            "6": [
+                "1630 - 2200"
+            ]
+        },
+        "scraped_data": {
+            "menu": [
+                "Seafood Tower",
+                "Scallop Ceviche",
+                "Smoked Salmon Terrine",
+                "Seafood Tasting",
+                "Sockeye Salmon",
+                "Short Ribs",
+                "Tuna Tartare",
+                "Parmesan Crusted Bay Scallop",
+                "Dungeness Crab Salad",
+                "Albacore Tuna",
+                "Raw Oysters",
+                "Panna Cotta",
+                "Beef Tenderloin",
+                "Baked Bay Scallops",
+                "Spicy Tuna Roll",
+                "Miso Sake Glazed Fish",
+                "King Crab Roll",
+                "Arctic Char",
+                "Stamina Roll",
+                "Ling Cod"
+            ],
+            "categories": [
+                "vegan friendly",
+                "classy restaurants",
+                "restaurants good for groups",
+                "dinner restaurants",
+                "dine-in restaurants",
+                "heated outdoor seating"
+            ]
+        }
+    },
+    {
+        "yelp_business_id": "DkKH_q0_vdWSWZwFhPFLZw",
+        "name": "Tavola",
+        "phone_number": "+1 604-606-4680",
+        "menu_url": "https://tavolavancouver.com/menu/",
+        "price": "$$$",
+        "rating": 4.4,
+        "yelp_url": "https://www.yelp.com/biz/tavola-vancouver?adjust_creative=SuhzlSss_Ymp7bpjhwEWSA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=SuhzlSss_Ymp7bpjhwEWSA",
+        "address": "1829 Robson StreetVancouver, BC V6G 3E4Canada",
+        "business_hours": {
+            "0": [
+                "1700 - 2130"
+            ],
+            "1": [
+                "1700 - 2130"
+            ],
+            "2": [
+                "1700 - 2130"
+            ],
+            "3": [
+                "1700 - 2130"
+            ],
+            "4": [
+                "1700 - 2230"
+            ],
+            "5": [
+                "1700 - 2230"
+            ],
+            "6": [
+                "1700 - 2130"
+            ]
+        },
+        "scraped_data": {
+            "menu": [
+                "Brick Chicken",
+                "Sticky Toffee",
+                "Cacio E Pepe",
+                "Tonnarelli Cacio Pepe",
+                "Pulled Pork Ragu",
+                "Chicken Liver Crostini",
+                "Walnut Pesto Crostini",
+                "Arugula Salad",
+                "Heirloom Tomatoes",
+                "La Quercia Prosciutto",
+                "Bucatini Pasta Pear Crostini",
+                "Pork Ragu Pasta",
+                "Panna Cotta",
+                "Pork Chop",
+                "Pear and Walnut Gorgonzola Crostini"
+            ],
+            "categories": [
+                "outdoor seating",
+                "classy restaurants",
+                "restaurants good for groups",
+                "dinner restaurants",
+                "dine-in restaurants",
+                "restaurants"
+            ]
+        }
+    },
+    {
+        "yelp_business_id": "XAH2HpuUUtu7CUO26pbs4w",
+        "name": "Saku",
+        "phone_number": "+1 604-423-4600",
+        "menu_url": "https://www.sakuvancouver.com/menus",
+        "price": "$$",
+        "rating": 4.3,
+        "yelp_url": "https://www.yelp.com/biz/saku-vancouver-8?adjust_creative=SuhzlSss_Ymp7bpjhwEWSA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=SuhzlSss_Ymp7bpjhwEWSA",
+        "address": "548 W BroadwayVancouver, BC V5Z 1E9Canada",
+        "business_hours": {
+            "0": [
+                "1100 - 1500",
+                "1700 - 2100"
+            ],
+            "1": [
+                "1100 - 1500",
+                "1700 - 2100"
+            ],
+            "2": [
+                "1100 - 1500",
+                "1700 - 2100"
+            ],
+            "3": [
+                "1100 - 1500",
+                "1700 - 2100"
+            ],
+            "4": [
+                "1100 - 1500",
+                "1700 - 2100"
+            ],
+            "5": [
+                "1100 - 2100"
+            ],
+            "6": [
+                "1100 - 2100"
+            ]
+        },
+        "scraped_data": {
+            "menu": [
+                "Cheese Katsu",
+                "Cabbage Salad",
+                "Chicken Katsu Curry",
+                "Rosu Katsu",
+                "Zenbu Katsu",
+                "Hire Katsu",
+                "Pork Loin",
+                "Shredded Cabbage",
+                "Pork Katsu",
+                "Chicken Breast Curry",
+                "Miso Katsu",
+                "Pork Fillet",
+                "Hire Curry",
+                "Black Miso",
+                "Potato Croquettes",
+                "Jumbo Ebi",
+                "Katsu Nabe",
+                "Ground Rosu Pork",
+                "Jumbo Shrimp"
+            ],
+            "categories": [
+                "casual restaurants",
+                "trendy restaurants",
+                "restaurants good for groups",
+                "dinner restaurants",
+                "dine-in restaurants",
+                "restaurants"
+            ]
+        }
+    },
+    {
+        "yelp_business_id": "wHTXCWVsx2PYPT21JV-HeQ",
+        "name": "Lupo",
+        "phone_number": "+1 604-569-2535",
+        "menu_url": "http://www.luporestaurant.ca/menu.html",
+        "price": "$$$",
+        "rating": 4.3,
+        "yelp_url": "https://www.yelp.com/biz/lupo-vancouver?adjust_creative=SuhzlSss_Ymp7bpjhwEWSA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=SuhzlSss_Ymp7bpjhwEWSA",
+        "address": "869 Hamilton StreetVancouver, BC V6B 2R7Canada",
+        "business_hours": {
+            "0": [],
+            "1": [
+                "1700 - 2200"
+            ],
+            "2": [
+                "1700 - 2200"
+            ],
+            "3": [
+                "1700 - 2200"
+            ],
+            "4": [
+                "1700 - 2200"
+            ],
+            "5": [
+                "1700 - 2200"
+            ],
+            "6": [
+                "1700 - 2200"
+            ]
+        },
+        "scraped_data": {
+            "menu": [
+                "Lamb Shank",
+                "Octopus Carpaccio",
+                "Black Truffle Fettuccine",
+                "Wagyu Beef Carpaccio",
+                "Rack of Lamb",
+                "Foie Gras Parfait",
+                "Gelato",
+                "Truffle Pasta",
+                "Tagliatelle Nero",
+                "Ricotta Gnocchi",
+                "Chocolate Torte",
+                "Halibut",
+                "Burrata Salad",
+                "Short Rib Ravioli",
+                "Veal Chop",
+                "Pork Cheek Gnocchi",
+                "Beet Salad",
+                "Lobster Risotto",
+                "Squid Ink Pasta",
+                "Mascarpone Polenta"
+            ],
+            "categories": [
+                "romantic restaurants",
+                "restaurants good for groups",
+                "dinner restaurants",
+                "dine-in restaurants",
+                "restaurants"
+            ]
+        }
+    },
+    {
+        "yelp_business_id": "uxJqItMyU6pAJxxmveiXBw",
+        "name": "Chinatown BBQ",
+        "phone_number": "+1 604-428-2626",
+        "menu_url": "https://chinatownbbq.com/menu/",
+        "price": "$$",
+        "rating": 4.4,
+        "yelp_url": "https://www.yelp.com/biz/chinatown-bbq-vancouver-2?adjust_creative=SuhzlSss_Ymp7bpjhwEWSA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=SuhzlSss_Ymp7bpjhwEWSA",
+        "address": "130 E Pender StreetVancouver, BC V6A 1T3Canada",
+        "business_hours": {
+            "0": [],
+            "1": [
+                "1100 - 2000"
+            ],
+            "2": [
+                "1100 - 2000"
+            ],
+            "3": [
+                "1100 - 2000"
+            ],
+            "4": [
+                "1100 - 2000"
+            ],
+            "5": [
+                "1100 - 2000"
+            ],
+            "6": [
+                "1100 - 2000"
+            ]
+        },
+        "scraped_data": {
+            "menu": [
+                "BBQ Pork",
+                "Roasted Pork Belly",
+                "BBQ Duck",
+                "Roast Pork",
+                "Gai Lan",
+                "Soy Sauce Chicken",
+                "BBQ Meat Combo",
+                "Chinese BBQ Classics",
+                "Curry Beef Brisket",
+                "Roasted Soy Chicken",
+                "Hong Kong",
+                "Crispy Pork Belly",
+                "Roast Duck",
+                "Four Treasures Chef Plate",
+                "Wonton Noodle Soup",
+                "Daily Soup",
+                "Ginger Scallion",
+                "Jellyfish",
+                "Salted Egg",
+                "Pork Fried Rice"
+            ],
+            "categories": [
+                "casual restaurants",
+                "catering",
+                "restaurants good for groups",
+                "brunch restaurants",
+                "lunch restaurants",
+                "dinner restaurants"
+            ]
+        }
+    },
+    {
+        "yelp_business_id": "o5YLdmUogknjtDzUBv5Smw",
+        "name": "Tom Sushi",
+        "phone_number": "+1 604-336-0855",
+        "menu_url": "https://tomsushi.ca/menu",
+        "price": "$$",
+        "rating": 4.7,
+        "yelp_url": "https://www.yelp.com/biz/tom-sushi-vancouver?adjust_creative=SuhzlSss_Ymp7bpjhwEWSA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=SuhzlSss_Ymp7bpjhwEWSA",
+        "address": "1175 Davie StVancouver, BC V6E 1N2Canada",
+        "business_hours": {
+            "0": [
+                "1200 - 2130"
+            ],
+            "1": [],
+            "2": [
+                "1200 - 2130"
+            ],
+            "3": [
+                "1200 - 2130"
+            ],
+            "4": [
+                "1200 - 2130"
+            ],
+            "5": [
+                "1200 - 2130"
+            ],
+            "6": [
+                "1200 - 2100"
+            ]
+        },
+        "scraped_data": {
+            "menu": [
+                "Aburi Salmon Belly",
+                "Salmon Aburi Nigiri",
+                "Red Dynamite Roll",
+                "Smoked Dynamite Roll",
+                "Dirty Magma Roll",
+                "Snow Roll",
+                "Spicy Tuna Roll",
+                "Unagi",
+                "Chopped Scallop Roll",
+                "Foie Gras",
+                "Salmon Jalapeno Halo Aburi Sushi",
+                "Black Dragon Roll",
+                "Spicy Salmon",
+                "Sushi Combo",
+                "Agedashi Tofu",
+                "Salmonholic Roll",
+                "Mango Flower Roll",
+                "Salmon Avocado Roll",
+                "Salmon Sashimi",
+                "Grilled Black Cod"
+            ],
+            "categories": [
+                "casual restaurants",
+                "trendy restaurants",
+                "dinner restaurants",
+                "dine-in restaurants",
+                "restaurants"
+            ]
+        }
+    },
+    {
+        "yelp_business_id": "RckRmOcX7OtMUDC40Cz3lg",
+        "name": "Hello Nori ",
+        "phone_number": "+1 604-564-9595",
+        "menu_url": "https://www.hellonori.com/menu",
+        "price": "$$",
+        "rating": 4.5,
+        "yelp_url": "https://www.yelp.com/biz/hello-nori-vancouver-2?adjust_creative=SuhzlSss_Ymp7bpjhwEWSA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=SuhzlSss_Ymp7bpjhwEWSA",
+        "address": "1165 Robson StreetVancouver, BC V6E 1B5Canada",
+        "business_hours": {
+            "0": [
+                "1100 - 2300"
+            ],
+            "1": [
+                "1100 - 2300"
+            ],
+            "2": [
+                "1100 - 2300"
+            ],
+            "3": [
+                "1100 - 2300"
+            ],
+            "4": [
+                "1100 - 0000"
+            ],
+            "5": [
+                "1100 - 0000"
+            ],
+            "6": [
+                "1100 - 2300"
+            ]
+        },
+        "scraped_data": {
+            "menu": [
+                "Truffle Lobster",
+                "Ora King Salmon Roll",
+                "Spicy Shrimp",
+                "Lobster Roll",
+                "Salmon Oshi",
+                "Snow Crab Roll",
+                "Bluefin Tuna Roll",
+                "Unagi Roll",
+                "Hokkaido Scallop",
+                "Scallop Roll",
+                "Rolled Sushi",
+                "Toro Roll",
+                "Spicy Tuna",
+                "Premium Cut Rolls",
+                "Tamago Rolls",
+                "Avocado Roll"
+            ],
+            "categories": [
+                "hipster restaurants",
+                "casual restaurants",
+                "trendy restaurants",
+                "romantic restaurants",
+                "classy restaurants",
+                "dinner restaurants"
+            ]
+        }
+    },
+    {
+        "yelp_business_id": "jKO4Og6ucdX2-YCTKQVYjg",
+        "name": "Cactus Club Cafe",
+        "phone_number": "+1 604-620-7410",
+        "menu_url": "https://www.cactusclubcafe.com/menus/",
+        "price": "$$",
+        "rating": 4.2,
+        "yelp_url": "https://www.yelp.com/biz/cactus-club-cafe-vancouver-8?adjust_creative=SuhzlSss_Ymp7bpjhwEWSA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=SuhzlSss_Ymp7bpjhwEWSA",
+        "address": "1085 Canada PlaceVancouver, BC V6C 3E1Canada",
+        "business_hours": {
+            "0": [
+                "1100 - 0000"
+            ],
+            "1": [
+                "1100 - 0000"
+            ],
+            "2": [
+                "1100 - 0000"
+            ],
+            "3": [
+                "1100 - 0000"
+            ],
+            "4": [
+                "1100 - 0030"
+            ],
+            "5": [
+                "1100 - 0030"
+            ],
+            "6": [
+                "1100 - 0000"
+            ]
+        },
+        "scraped_data": {
+            "menu": [
+                "Butternut Squash Ravioli",
+                "Fish Tacos",
+                "Burgers Steak Chicken Sandwiches Poutine",
+                "Tuna Stack",
+                "Chicken Tenders",
+                "Tuna Poke Bowl",
+                "Mini Burgers",
+                "Prawn Trio",
+                "Blackened Creole Chicken",
+                "Prawn Ravioli",
+                "Crispy Tofu Bowl",
+                "Butternut Squash Soup",
+                "Chocolate Lava Cake",
+                "Feenie Burger",
+                "Hot Chicken Wings",
+                "Peking Duck Sandwich",
+                "Tuna Tataki",
+                "Kale Salad"
+            ],
+            "categories": [
+                "vegan friendly",
+                "outdoor seating",
+                "trendy nightlife",
+                "restaurants good for groups",
+                "lunch restaurants",
+                "dinner restaurants"
+            ]
+        }
+    },
+    {
+        "yelp_business_id": "fkyvSfVYXHlG6nHRTBhsdA",
+        "name": "JOEY Shipyards",
+        "phone_number": "+1 604-343-2649",
+        "menu_url": "https://joeyrestaurants.com/location/joey-shipyards/menu#food",
+        "price": "$$",
+        "rating": 4.5,
+        "yelp_url": "https://www.yelp.com/biz/joey-shipyards-north-vancouver-3?adjust_creative=SuhzlSss_Ymp7bpjhwEWSA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=SuhzlSss_Ymp7bpjhwEWSA",
+        "address": "125 Victory Ship Way#110ShipyardsVancouver, BC V7L 0G5Canada",
+        "business_hours": {
+            "0": [
+                "1100 - 0000"
+            ],
+            "1": [
+                "1100 - 0000"
+            ],
+            "2": [
+                "1100 - 0000"
+            ],
+            "3": [
+                "1100 - 0000"
+            ],
+            "4": [
+                "1100 - 0100"
+            ],
+            "5": [
+                "1100 - 0100"
+            ],
+            "6": [
+                "1100 - 0000"
+            ]
+        },
+        "scraped_data": {
+            "menu": [
+                "Szechuan Chicken Lettuce Wraps",
+                "Seared Salmon Sushi",
+                "Tuna Poke Bowl",
+                "Korean Fried Cauliflower",
+                "Oven Roasted Wild Pacific Cod",
+                "Yellowfin Tuna Salad",
+                "Katsu Chicken Salad",
+                "Blackened Chicken",
+                "Butter Chicken",
+                "Mediterranean Bowl",
+                "Gyoza",
+                "New Cobb Salad",
+                "Ravioli Bianco",
+                "Peach Bellini",
+                "Steak Frites",
+                "Baja Fish Tacos",
+                "Chicken Peanut Salad",
+                "Sliders Royale Duo",
+                "Chocolate Lava Cake"
+            ],
+            "categories": [
+                "vegan friendly",
+                "outdoor seating",
+                "casual restaurants",
+                "touristy restaurants",
+                "trendy restaurants",
+                "classy restaurants"
+            ]
+        }
+    },
+    {
+        "yelp_business_id": "LjdbthVdtLYKSi7iVAFl0g",
+        "name": "Jam Cafe on Beatty",
+        "phone_number": "+1 778-379-1992",
+        "menu_url": "http://jamcafes.com/vancouver/menu/",
+        "price": "$$",
+        "rating": 4.4,
+        "yelp_url": "https://www.yelp.com/biz/jam-cafe-on-beatty-vancouver?adjust_creative=SuhzlSss_Ymp7bpjhwEWSA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=SuhzlSss_Ymp7bpjhwEWSA",
+        "address": "556 Beatty StreetVancouver, BC V6B 2L3Canada",
+        "business_hours": {
+            "0": [
+                "0800 - 1500"
+            ],
+            "1": [
+                "0800 - 1500"
+            ],
+            "2": [
+                "0800 - 1500"
+            ],
+            "3": [
+                "0800 - 1500"
+            ],
+            "4": [
+                "0800 - 1500"
+            ],
+            "5": [
+                "0800 - 1500"
+            ],
+            "6": [
+                "0800 - 1500"
+            ]
+        },
+        "scraped_data": {
+            "menu": [
+                "Fried Chicken",
+                "French Toast",
+                "Charlie Bowl",
+                "Eggs Benedict",
+                "Gravy Coop",
+                "Eggs Benny",
+                "Green Eggs and Ham",
+                "Pulled Pork",
+                "Little Charlie",
+                "Cinnamon Bun",
+                "Later Tater Bowl",
+                "Buffalo Chicken Benedict",
+                "Veggie Bowl",
+                "Poached Egg",
+                "Pork Belly Benny",
+                "Cinnamon Swirl",
+                "Huevos Rancheros",
+                "Pork Belly Benedict",
+                "Salmon Eggs",
+                "Banana Walnut"
+            ],
+            "categories": [
+                "vegan friendly",
+                "hipster restaurants",
+                "casual restaurants",
+                "lunch restaurants",
+                "brunch restaurants",
+                "breakfast restaurants"
+            ]
+        }
+    },
+    {
+        "yelp_business_id": "0oGCF9xsvKe1vS6Sm3o3VQ",
+        "name": "Kokoro Tokyo Mazesoba",
+        "phone_number": "+1 604-559-8872",
+        "menu_url": "http://menyakokoro.com/menu/",
+        "price": "$$",
+        "rating": 4.1,
+        "yelp_url": "https://www.yelp.com/biz/kokoro-tokyo-mazesoba-vancouver-2?adjust_creative=SuhzlSss_Ymp7bpjhwEWSA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=SuhzlSss_Ymp7bpjhwEWSA",
+        "address": "551 Seymour StreetVancouver, BC V6B 3H6Canada",
+        "business_hours": {
+            "0": [
+                "1100 - 2200"
+            ],
+            "1": [
+                "1100 - 2200"
+            ],
+            "2": [
+                "1100 - 2200"
+            ],
+            "3": [
+                "1100 - 2200"
+            ],
+            "4": [
+                "1100 - 2200"
+            ],
+            "5": [
+                "1130 - 2200"
+            ],
+            "6": [
+                "1130 - 2200"
+            ]
+        },
+        "scraped_data": {
+            "menu": [
+                "Niku Mazesoba",
+                "Zenbu Mazesoba",
+                "Mentaiko Cream Mazesoba",
+                "Chicken Karaage",
+                "Pork Belly",
+                "Spicy Mazesoba",
+                "Spicy Tonkotsu Ramen",
+                "Shio Mazesoba",
+                "Minced Pork",
+                "Salmon Avocado Salad",
+                "Soba Noodles",
+                "Rice Bowl",
+                "Hokkaido Creme Cup",
+                "Chef Special",
+                "Tomato Tonkatsu Ramen",
+                "Curry Mazesoba",
+                "Ramen Noodles",
+                "Ground Saba Fish",
+                "Ebi Mayo Shrimp",
+                "Cremia"
+            ],
+            "categories": [
+                "vegan friendly",
+                "casual restaurants",
+                "trendy restaurants",
+                "restaurants good for groups",
+                "dessert restaurants",
+                "lunch restaurants"
+            ]
+        }
+    },
+    {
+        "yelp_business_id": "9Waotz-_G9woVPWZTmZcwA",
+        "name": "Lunch Lady",
+        "phone_number": "+1 604-559-5938",
+        "menu_url": "https://thelunchlady.com/menu",
+        "price": "$$",
+        "rating": 4.1,
+        "yelp_url": "https://www.yelp.com/biz/lunch-lady-vancouver?adjust_creative=SuhzlSss_Ymp7bpjhwEWSA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=SuhzlSss_Ymp7bpjhwEWSA",
+        "address": "1046 Commercial DriveVancouver, BC V5L 3W9Canada",
+        "business_hours": {
+            "0": [],
+            "1": [
+                "1100 - 1500",
+                "1645 - 2130"
+            ],
+            "2": [
+                "1100 - 1500",
+                "1645 - 2130"
+            ],
+            "3": [
+                "1100 - 1500",
+                "1645 - 2130"
+            ],
+            "4": [
+                "1030 - 1530",
+                "1700 - 2300"
+            ],
+            "5": [
+                "1030 - 1530",
+                "1700 - 2300"
+            ],
+            "6": [
+                "1030 - 1530",
+                "1700 - 2130"
+            ]
+        },
+        "scraped_data": {
+            "menu": [
+                "Steak Luc Lac",
+                "Beef Carpaccio",
+                "Spring Rolls",
+                "Garlic Noodles",
+                "Stir Fried Noodles",
+                "Prawn Fritters",
+                "Beef Pho",
+                "Pork Skewers",
+                "Pho Bo",
+                "Crispy Prawn",
+                "Taro Chips",
+                "Pork Belly",
+                "Beef Noodle Soup",
+                "Pandan Sticky Rice",
+                "House Special Fried Rice",
+                "Bone Marrow Wagyu Pho",
+                "Crab Fried Rice",
+                "Grilled Pork Chops",
+                "Duck Egg Noodles",
+                "Bun Bo Hue"
+            ],
+            "categories": [
+                "pescatarian options",
+                "vegan friendly",
+                "outdoor seating",
+                "hipster restaurants",
+                "casual restaurants",
+                "touristy restaurants"
+            ]
+        }
+    }
+]

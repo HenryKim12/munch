@@ -1,5 +1,8 @@
 import requests
 import os
+import sys
+import json
+import traceback
 from dotenv import load_dotenv
 from bs4 import BeautifulSoup
 from datetime import datetime
@@ -14,10 +17,17 @@ OFFSET_LIMIT = 1000
 def data_pipeline(location):
     try:
         restaurant_api_contents = fetch_yelp_api(location)
+        print(f"[{datetime.now()}] Completed Yelp API fetch")
+
         restaurant_contents = scrape_restaurants(restaurant_api_contents)
+        print(f"[{datetime.now()}] Completed scraping all Yelp pages")
+
         update_db(restaurant_contents)
+        print(f"[{datetime.now()}] Completed upsert into db")
+
+        cache_data(restaurant_contents)
     except Exception as e:
-        print(str(e))
+        print(f"[{datetime.now()}] {str(e)}")
         raise Exception(f"[{datetime.now()}] {str(e)}")
 
 def fetch_yelp_api(location):
@@ -40,7 +50,9 @@ def fetch_yelp_api(location):
                 total = response.json()["total"]
             
             restaurants = response.json()["businesses"]
+            count = 1
             for restaurant in restaurants:
+                print(count)
                 restaurant_valid = validate_api_result(restaurant)
                 if not restaurant_valid:
                     continue
@@ -72,14 +84,23 @@ def fetch_yelp_api(location):
                     continue
 
                 restaurant_api_contents.append(content)
-
+                count += 1
             params["offset"] += 50
         return restaurant_api_contents
+    except KeyError as e:
+        raise Exception(f"Error while parsing yelp response: {str(e)}")
     except Exception as e:
         raise Exception(f"Error while fetching yelp api: {str(e)}")
     
-def validate_api_result(restaurant):
-    return restaurant["url"] and restaurant["rating"] and restaurant["price"] and restaurant["business_hours"] and restaurant["attributes"]
+def validate_api_result(restaurant) -> bool:
+    return ("url" in restaurant and 
+            "rating" in restaurant and 
+            "price" in restaurant and 
+            "business_hours" in restaurant and 
+            "attributes" in restaurant and
+            "business_hours" in restaurant and
+            len(restaurant["business_hours"]) > 0 and
+            "open" in restaurant["business_hours"][0])
 
 def validate_content(content):
     is_valid = True
@@ -92,7 +113,13 @@ def validate_content(content):
 def scrape_restaurants(restaurant_contents):
     for content in restaurant_contents:
         content["scraped_data"] = scrape(content["yelp_url"]) 
-    return restaurant_contents
+
+    new_restaurant_contents = []
+    for i in range(len(restaurant_contents)):
+        if restaurant_contents[i]["scraped_data"]:
+            new_restaurant_contents.append(restaurant_contents[i])
+
+    return new_restaurant_contents
 
 def scrape(url: str) -> dict: 
     try:
@@ -100,28 +127,43 @@ def scrape(url: str) -> dict:
         # "https://www.yelp.com/biz/the-flying-pig-vancouver-5?adjust_creative=SuhzlSss_Ymp7bpjhwEWSA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=SuhzlSss_Ymp7bpjhwEWSA"
         response = requests.get(url=url)
         soup = BeautifulSoup(response.text, "html.parser")
-        main = soup.find_all("main", id="main-content")[0]
+        main_list = soup.find_all("main", id="main-content")
+        if len(main_list) == 0:
+            return {}
+        main = main_list[0]
 
-        menu_section = main.find_all("section", attrs={"class": "y-css-rgh890", "aria-label": "Menu"})[0]
+        menu_section_list = main.find_all("section", attrs={"class": "y-css-rgh890", "aria-label": "Menu"})
+        if len(menu_section_list) == 0:
+            return {}
+        menu_section = menu_section_list[0]
         dish_result = []
         dish_tags = menu_section.find_all("p", attrs={"class": "y-css-tnxl0n", "data-font-weight": "bold"})
+        if len(dish_tags) == 0:
+            return {}
         for dish_tag in dish_tags:
             dish = dish_tag.decode_contents()
             dish_result.append(dish)
         data["menu"] = dish_result
 
-        categories_section = main.find_all("section", attrs={"class": "y-css-rgh890", "aria-label": "People also searched for"})[0]
+        categories_section_list = main.find_all("section", attrs={"class": "y-css-rgh890", "aria-label": "People also searched for"})
+        if len(categories_section_list) == 0:
+            return {}
+        categories_section = categories_section_list[0]
+
         categories_result = []
         category_tags = categories_section.find_all("p", attrs={"class": "y-css-1o34y7f", "data-font-weight": "semibold"})
+        if len(category_tags) == 0:
+            return {}
         for category_tag in category_tags:
             category = category_tag.decode_contents()
             categories_result.append(category)
         data["categories"] = categories_result
-
-    except Exception as e:         
+        return data
+    except Exception as e:    
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        print(exc_type, fname, exc_tb.tb_lineno)     
         raise Exception(f"Error while scraping yelp restaurant url: {str(e)}")
-
-    return data
 
 def update_db(restaurant_contents: list[dict]) -> None:
     try:
@@ -130,7 +172,7 @@ def update_db(restaurant_contents: list[dict]) -> None:
             if exists:
                 update_restaurant(content)
                 continue
-                
+
             menu_instance = models.Menu(
                 url=content["menu_url"], 
                 popular_dishes=content["scraped_data"]["menu"]
@@ -138,13 +180,13 @@ def update_db(restaurant_contents: list[dict]) -> None:
             db.session.add(menu_instance)
 
             businessHours_instance = models.BusinessHours(
-                monday=content["business_hours"][0], 
-                tuesday=content["business_hours"][1], 
-                wednesday=content["business_hours"][2], 
-                thursday=content["business_hours"][3], 
-                friday=content["business_hours"][4], 
-                saturday=content["business_hours"][5], 
-                sunday=content["business_hours"][6], 
+                monday=content["business_hours"]["0"], 
+                tuesday=content["business_hours"]["1"], 
+                wednesday=content["business_hours"]["2"], 
+                thursday=content["business_hours"]["3"], 
+                friday=content["business_hours"]["4"], 
+                saturday=content["business_hours"]["5"], 
+                sunday=content["business_hours"]["6"], 
             )
             db.session.add(businessHours_instance)
 
@@ -163,6 +205,7 @@ def update_db(restaurant_contents: list[dict]) -> None:
             db.session.add(restaurant_instance)
             db.session.commit()
     except Exception as e:
+        print(traceback.print_exc())
         raise Exception(f"Error while update database with restaurant data: {str(e)}")
 
 def restaurant_exists(yelp_business_id: str) -> bool:
@@ -170,6 +213,10 @@ def restaurant_exists(yelp_business_id: str) -> bool:
 
 def update_restaurant(content: dict) -> None:
     restaurant = models.Restaurant.query.filter_by(yelp_business_id=content["yelp_business_id"]).first()
+
+    # TODO: use cached values to compare instead of using db operation??
+    # with open('cache/prev_data.json', 'r') as json_file:
+    #         restaurant_contents = json.load(json_file)
 
     # update restaurants
     restaurant_updated = False
@@ -212,31 +259,37 @@ def update_restaurant(content: dict) -> None:
 
     # update business_hours
     business_hours_updated = False
-    if restaurant.business_hours.monday != content["business_hours"][0]: 
-        restaurant.business_hours.monday = content["business_hours"][0]
+    if restaurant.business_hours.monday != content["business_hours"]["0"]: 
+        restaurant.business_hours.monday = content["business_hours"]["0"]
         business_hours_updated = True
-    if restaurant.business_hours.tuesday != content["business_hours"][1]: 
-        restaurant.business_hours.tuesday = content["business_hours"][1]
+    if restaurant.business_hours.tuesday != content["business_hours"]["1"]: 
+        restaurant.business_hours.tuesday = content["business_hours"]["1"]
         business_hours_updated = True
-    if restaurant.business_hours.wednesday != content["business_hours"][2]: 
-        restaurant.business_hours.wednesday = content["business_hours"][2]
+    if restaurant.business_hours.wednesday != content["business_hours"]["2"]: 
+        restaurant.business_hours.wednesday = content["business_hours"]["2"]
         business_hours_updated = True
-    if restaurant.business_hours.thursday != content["business_hours"][3]: 
-        restaurant.business_hours.thursday = content["business_hours"][3]
+    if restaurant.business_hours.thursday != content["business_hours"]["3"]: 
+        restaurant.business_hours.thursday = content["business_hours"]["3"]
         business_hours_updated = True
-    if restaurant.business_hours.friday != content["business_hours"][4]: 
-        restaurant.business_hours.friday = content["business_hours"][4]
+    if restaurant.business_hours.friday != content["business_hours"]["4"]: 
+        restaurant.business_hours.friday = content["business_hours"]["4"]
         business_hours_updated = True
-    if restaurant.business_hours.saturday != content["business_hours"][5]: 
-        restaurant.business_hours.saturday = content["business_hours"][5]
+    if restaurant.business_hours.saturday != content["business_hours"]["5"]: 
+        restaurant.business_hours.saturday = content["business_hours"]["5"]
         business_hours_updated = True
-    if restaurant.business_hours.sunday != content["business_hours"][6]: 
-        restaurant.business_hours.sunday = content["business_hours"][6]
+    if restaurant.business_hours.sunday != content["business_hours"]["6"]: 
+        restaurant.business_hours.sunday = content["business_hours"]["6"]
         business_hours_updated = True
     if business_hours_updated:
         restaurant.business_hours.updated_at = db.func.current_timestamp()
 
     db.session.commit()
+
+def cache_data(restaurant_contents):
+    # TODO: move existing .json to old/ and then save the new one
+    with open('cache/prev_data.json', 'w') as json_file:
+        json.dump(restaurant_contents, json_file, indent=4)
+    print("Cached newly upserted data")
 
 def get_restaurants():
     restaurants = models.Restaurant.query.all()

@@ -16,7 +16,7 @@ class Restaurant(db.Model):
     yelp_business_id = db.Column(db.String(150), nullable=False, unique=True)
     name = db.Column(db.String(150), nullable=False, unique=False)
     address = db.Column(db.String(150), nullable=False, unique=False)
-    phone_number = db.Column(db.String(20), nullable=False, unique=True)
+    phone_number = db.Column(db.String(20), nullable=False, unique=False)
     menu = db.relationship('Menu', backref='restaurant', uselist=False, cascade="all, delete-orphan", single_parent=True)
     categories = db.Column(ARRAY(db.String), nullable=False, unique=False)
     price = db.Column(db.String(5), nullable=False, unique=False)
@@ -52,7 +52,7 @@ class Menu(db.Model):
     __table_args__ = {'schema': os.getenv("SCHEMA")}
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     restaurant_id = db.Column(db.Integer, db.ForeignKey(f'{os.getenv("SCHEMA")}.restaurant.id'), nullable=False, unique=True)
-    url = db.Column(db.String(150), nullable=False, unique=True)
+    url = db.Column(db.String(150), nullable=False, unique=False)
     popular_dishes = db.Column(ARRAY(db.String(150)), nullable=False, unique=False)
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp(), nullable=False, unique=False)
     updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), nullable=False, unique=False)
