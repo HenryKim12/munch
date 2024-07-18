@@ -3,6 +3,7 @@ import os
 import sys
 import json
 import traceback
+import shutil
 from dotenv import load_dotenv
 from bs4 import BeautifulSoup
 from datetime import datetime
@@ -214,7 +215,7 @@ def restaurant_exists(yelp_business_id: str) -> bool:
 def update_restaurant(content: dict) -> None:
     restaurant = models.Restaurant.query.filter_by(yelp_business_id=content["yelp_business_id"]).first()
 
-    # TODO: use cached values to compare instead of using db operation??
+    # TODO: use cached values to compare instead of using db operation?? also use in get, getbyID??
     # with open('cache/prev_data.json', 'r') as json_file:
     #         restaurant_contents = json.load(json_file)
 
@@ -286,7 +287,9 @@ def update_restaurant(content: dict) -> None:
     db.session.commit()
 
 def cache_data(restaurant_contents):
-    # TODO: move existing .json to old/ and then save the new one
+    if os.path.exists('cache/prev_data.json'):
+        shutil.move('cache/prev_data.json', f"cache/old/{datetime.now().strftime('%Y_%m_%d')}.json")
+    
     with open('cache/prev_data.json', 'w') as json_file:
         json.dump(restaurant_contents, json_file, indent=4)
     print("Cached newly upserted data")
