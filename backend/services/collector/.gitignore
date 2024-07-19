@@ -43,3 +43,5 @@ venv
 .env-my
 
 migrations/
+
+cache/

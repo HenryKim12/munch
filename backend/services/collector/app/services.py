@@ -23,6 +23,9 @@ def data_pipeline(location):
         restaurant_contents = scrape_restaurants(restaurant_api_contents)
         print(f"[{datetime.now()}] Completed scraping all Yelp pages")
 
+        # with open('cache/prev_data.json', 'r') as json_file:
+        #     restaurant_contents = json.load(json_file)
+
         update_db(restaurant_contents)
         print(f"[{datetime.now()}] Completed upsert into db")
 
