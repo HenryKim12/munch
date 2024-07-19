@@ -291,7 +291,7 @@ def update_restaurant(content: dict) -> None:
 
 def cache_data(restaurant_contents):
     if os.path.exists('cache/prev_data.json'):
-        shutil.move('cache/prev_data.json', f"cache/old/{datetime.now().strftime('%Y_%m_%d')}.json")
+        shutil.move('cache/prev_data.json', f"cache/old/{datetime.now().strftime('%Y_%m_%d %H:%M:%S')}.json")
     
     with open('cache/prev_data.json', 'w') as json_file:
         json.dump(restaurant_contents, json_file, indent=4)
