@@ -64,19 +64,44 @@ def update_user(id, data):
             user.restaurants.append(restaurant)
     db.session.commit()
 
-def get_user_restaurants(id):
-    user_restaurants = models.UserRestaurant.query.filter_by(user_id=id)
+def get_user_restaurants(user_id):
+    user_restaurants = models.UserRestaurant.query.filter_by(user_id=user_id)
     res = []
     for user_restaurant in user_restaurants:
         res.append(user_restaurant.to_dict())
     return res
 
-def add_user_restaurant(id, data):
+def add_user_restaurant(user_id, data):
+    existingRating = db.session.query(db.exists().where(models.UserRestaurant.user_id == user_id and 
+                                                        models.UserRestaurant.restaurant_id == data["restaurant_id"])).scalar()
+    if existingRating:
+        raise ValueError("Rating already exists for restaurant.")
+    
     user_restaurant = models.UserRestaurant(
-        user_id = id,
+        user_id = user_id,
         restaurant_id=data["restaurant_id"],
         rating=data["rating"]
     )
     db.session.add(user_restaurant)
+    db.session.commit()
+
+def delete_user_restaurant(user_id, restaurant_id):
+    existingRating = db.session.query(db.exists().where(models.UserRestaurant.user_id == user_id and 
+                                                        models.UserRestaurant.restaurant_id == restaurant_id)).scalar()
+    if not existingRating:
+        raise ValueError("User does not have rating for restaurant")
+
+    db.session.delete(existingRating)
+    db.session.commit()
+
+def update_user_restaurant(user_id, restaurant_id, data):
+    existingRating = db.session.query(db.exists().where(models.UserRestaurant.user_id == user_id and 
+                                                        models.UserRestaurant.restaurant_id == restaurant_id)).scalar()
+    if not existingRating:
+        raise ValueError("User does not have rating for restaurant")
+    
+    if "rating" in data:
+        existingRating.rating = data["rating"]
+    
     db.session.commit()
 

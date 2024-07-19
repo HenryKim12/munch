@@ -62,19 +62,40 @@ def update(id):
     except Exception as e:
         return jsonify(str(e)), 400
     
-@main.route("/users/<int:id>/restaurants", methods=["GET"])
-def get_user_restaurants(id):
+@main.route("/users/<int:user_id>/restaurants", methods=["GET"])
+def get_user_restaurants(user_id):
     try:
-        user_restaurants = services.get_user_restaurants(id)
+        user_restaurants = services.get_user_restaurants(user_id)
         return jsonify(user_restaurants), 200
     except Exception as e:
         return jsonify(str(e)), 400
     
-@main.route('/users/<int:id>/restaurants', methods=["POST"])
-def post_user_restaurant(id):
+@main.route('/users/<int:user_id>/restaurants', methods=["POST"])
+def post_user_restaurant(user_id):
     try:
         data = request.get_json()
-        services.add_user_restaurant(id, data)
+        services.add_user_restaurant(user_id, data)
         return jsonify(f"Successfully added restaurant rating"), 200
+    except Exception as e:
+        return jsonify(str(e)), 400
+    
+@main.route("/users/<int:user_id>/restaurants/<int:restaurant_id>", methods=["DELETE"])
+def del_user_restaurant(user_id, restaurant_id):
+    try:
+        services.delete_user_restaurant(user_id, restaurant_id)
+        return jsonify(f"Successfully deleted rating for user_id: {user_id} and restaurant_id: {restaurant_id}"), 200
+    except ValueError as e:
+        return jsonify(str(e)), 404
+    except Exception as e:
+        return jsonify(str(e)), 400
+    
+@main.route("/users/<int:id>/restaurants<int:restaurant_id>", methods=["PUT"])
+def update_user_restaurant(user_id, restaurant_id):
+    try:
+        data = request.get_json()
+        services.update_user_restaurant(user_id, restaurant_id, data)
+        return jsonify(f"Successfully updated rating for user_id: {user_id} and restaurant_id: {restaurant_id}"), 200
+    except ValueError as e:
+        return jsonify(str(e)), 404
     except Exception as e:
         return jsonify(str(e)), 400
