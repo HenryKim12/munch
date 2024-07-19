@@ -40,3 +40,17 @@ class UserRestaurant(db.Model):
     restaurant_id = db.Column(db.Integer, nullable=False)
     rating = db.Column(db.Float, nullable=False, unique=False) 
     user = db.relationship('User', back_populates='restaurants') 
+
+    def __repr__(self):
+        return f'<User Restaurant {self.id}>'
+    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "restaurant_id": self.restaurant_id,
+            "rating": self.rating,
+        }
+
+    def __getitem__(self, key):
+        return self.__dict__[key]

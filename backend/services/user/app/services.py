@@ -64,15 +64,19 @@ def update_user(id, data):
             user.restaurants.append(restaurant)
     db.session.commit()
 
-def add_user_restaurant(data):
+def get_user_restaurants(id):
+    user_restaurants = models.UserRestaurant.query.filter_by(user_id=id)
+    res = []
+    for user_restaurant in user_restaurants:
+        res.append(user_restaurant.to_dict())
+    return res
+
+def add_user_restaurant(id, data):
     user_restaurant = models.UserRestaurant(
-        user_id = data["user_id"],
+        user_id = id,
         restaurant_id=data["restaurant_id"],
         rating=data["rating"]
     )
     db.session.add(user_restaurant)
     db.session.commit()
-
-def get_user_restaurants():
-    pass
 
