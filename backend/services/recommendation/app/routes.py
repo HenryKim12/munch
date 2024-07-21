@@ -12,7 +12,7 @@ main = Blueprint('main', __name__)
 def get(user_id):
     try:
         recommendation = engine.recommend(user_id)
-        return jsonify(), 200
+        return jsonify(recommendation), 200
     except Exception as e:
         print(str(e))
         return jsonify(str(e)), 400
