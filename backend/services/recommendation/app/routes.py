@@ -8,10 +8,10 @@ load_dotenv()
 
 main = Blueprint('main', __name__)
 
-@main.route('/recommend', methods=["GET"])
-def get():
+@main.route('/recommend/<int:user_id>', methods=["GET"])
+def get(user_id):
     try:
-        
+        recommendation = engine.recommend(user_id)
         return jsonify(), 200
     except Exception as e:
         print(str(e))

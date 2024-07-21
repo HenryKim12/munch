@@ -10,4 +10,4 @@ if __name__ == "__main__":
     debug = False;
     if (os.getenv("ENV") == "DEV"):
         debug = True;
-    app.run(debug=debug)
+    app.run(port=os.getenv("PORT"), debug=debug)
