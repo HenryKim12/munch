@@ -306,3 +306,7 @@ def get_restaurant_by_id(id):
     if not restaurant:
         raise ValueError("Restaurant does not exist.")
     return restaurant
+
+def get_unrated_restaurants(user_id, data):
+    rated_ids = data["rated_restaurants"]
+    
