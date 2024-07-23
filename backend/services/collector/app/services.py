@@ -307,7 +307,7 @@ def get_restaurant_by_id(id):
         raise ValueError("Restaurant does not exist.")
     return restaurant
 
-def get_unrated_restaurants(data):
+def get_unrated_restaurant_ids(data):
     rated_ids = data["rated_restaurants"]
     all_restaurants = models.Restaurant.query.all()
     unrated_ids = []
