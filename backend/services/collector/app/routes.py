@@ -9,6 +9,14 @@ load_dotenv()
 
 main = Blueprint('main', __name__)
 
+@main.route("/collect", methods=["GET"])
+def collect():
+    try:
+        services.data_pipeline("Vancouver")
+        return jsonify("Successfully fetched and updated restaurant data")
+    except Exception as e:
+        return jsonify(str(e))
+
 @main.route('/restaurants', methods=["GET"])
 def get():
     try:
@@ -27,21 +35,14 @@ def getByID(id):
     except Exception as e:
         return jsonify(str(e)), 400
     
-@main.route('/restaurants/<int:user_id>', methods=["POST"])
-def get_unrated_restaurants(user_id):
+@main.route('/restaurants', methods=["POST"])
+def get_unrated_restaurants():
     try:
         data = request.get_json()
-        unratedRestaurants = services.get_unrated_restaurants(user_id, data)
+        unratedRestaurants = services.get_unrated_restaurants(data)
         return jsonify(unratedRestaurants), 200
     # except ValueError as e:
     #     return jsonify(str(e)), 404
     except Exception as e:
         return jsonify(str(e)), 400
-
-@main.route("/collect", methods=["GET"])
-def collect():
-    try:
-        services.data_pipeline("Vancouver")
-        return jsonify("Successfully fetched and updated restaurant data")
-    except Exception as e:
-        return jsonify(str(e))
+    
