@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 from app import models
 from flask import jsonify
 from app.extensions import db
+from sqlalchemy import and_
 
 import os
 import bcrypt
@@ -72,8 +73,8 @@ def get_user_restaurants(user_id):
     return res
 
 def add_user_restaurant(user_id, data):
-    existingRating = db.session.query(db.exists().where(models.UserRestaurant.user_id == user_id and 
-                                                        models.UserRestaurant.restaurant_id == data["restaurant_id"])).scalar()
+    existingRating = db.session.query(models.UserRestaurant.id).filter(and_(models.UserRestaurant.user_id == user_id, 
+                                                                            models.UserRestaurant.restaurant_id == data["restaurant_id"])).first()
     if existingRating:
         raise ValueError("Rating already exists for restaurant.")
     
@@ -86,8 +87,8 @@ def add_user_restaurant(user_id, data):
     db.session.commit()
 
 def delete_user_restaurant(user_id, restaurant_id):
-    existingRating = db.session.query(db.exists().where(models.UserRestaurant.user_id == user_id and 
-                                                        models.UserRestaurant.restaurant_id == restaurant_id)).scalar()
+    existingRating = db.session.query(models.UserRestaurant.id).filter(and_(models.UserRestaurant.user_id == user_id, 
+                                                                            models.UserRestaurant.restaurant_id == restaurant_id)).first()
     if not existingRating:
         raise ValueError("User does not have rating for restaurant")
 
@@ -95,8 +96,9 @@ def delete_user_restaurant(user_id, restaurant_id):
     db.session.commit()
 
 def update_user_restaurant(user_id, restaurant_id, data):
-    existingRating = db.session.query(db.exists().where(models.UserRestaurant.user_id == user_id and 
-                                                        models.UserRestaurant.restaurant_id == restaurant_id)).scalar()
+    existingRating = db.session.query(models.UserRestaurant.id).filter(and_(models.UserRestaurant.user_id == user_id, 
+                                                                            models.UserRestaurant.restaurant_id == restaurant_id)).first()
+    
     if not existingRating:
         raise ValueError("User does not have rating for restaurant")
     
