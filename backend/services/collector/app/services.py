@@ -50,13 +50,13 @@ def fetch_yelp_api(location):
         total = None
         while (not total or (params["offset"] <= OFFSET_LIMIT and params["offset"] < total)):
             response = requests.get(YELP_API_URL, headers=headers, params=params)
+            if response.status_code == 400:
+                break
             if not total:
                 total = response.json()["total"]
             
             restaurants = response.json()["businesses"]
-            count = 1
             for restaurant in restaurants:
-                print(count)
                 restaurant_valid = validate_api_result(restaurant)
                 if not restaurant_valid:
                     continue
@@ -88,12 +88,17 @@ def fetch_yelp_api(location):
                     continue
 
                 restaurant_api_contents.append(content)
-                count += 1
             params["offset"] += 50
         return restaurant_api_contents
     except KeyError as e:
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        print(exc_type, fname, exc_tb.tb_lineno)  
         raise Exception(f"Error while parsing yelp response: {str(e)}")
     except Exception as e:
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        print(exc_type, fname, exc_tb.tb_lineno)  
         raise Exception(f"Error while fetching yelp api: {str(e)}")
     
 def validate_api_result(restaurant) -> bool:
@@ -184,13 +189,13 @@ def update_db(restaurant_contents: list[dict]) -> None:
             db.session.add(menu_instance)
 
             businessHours_instance = models.BusinessHours(
-                monday=content["business_hours"]["0"], 
-                tuesday=content["business_hours"]["1"], 
-                wednesday=content["business_hours"]["2"], 
-                thursday=content["business_hours"]["3"], 
-                friday=content["business_hours"]["4"], 
-                saturday=content["business_hours"]["5"], 
-                sunday=content["business_hours"]["6"], 
+                monday=content["business_hours"][0], 
+                tuesday=content["business_hours"][1], 
+                wednesday=content["business_hours"][2], 
+                thursday=content["business_hours"][3], 
+                friday=content["business_hours"][4], 
+                saturday=content["business_hours"][5], 
+                sunday=content["business_hours"][6], 
             )
             db.session.add(businessHours_instance)
 
@@ -263,26 +268,26 @@ def update_restaurant(content: dict) -> None:
 
     # update business_hours
     business_hours_updated = False
-    if restaurant.business_hours.monday != content["business_hours"]["0"]: 
-        restaurant.business_hours.monday = content["business_hours"]["0"]
+    if restaurant.business_hours.monday != content["business_hours"][0]: 
+        restaurant.business_hours.monday = content["business_hours"][0]
         business_hours_updated = True
-    if restaurant.business_hours.tuesday != content["business_hours"]["1"]: 
-        restaurant.business_hours.tuesday = content["business_hours"]["1"]
+    if restaurant.business_hours.tuesday != content["business_hours"][1]: 
+        restaurant.business_hours.tuesday = content["business_hours"][1]
         business_hours_updated = True
-    if restaurant.business_hours.wednesday != content["business_hours"]["2"]: 
-        restaurant.business_hours.wednesday = content["business_hours"]["2"]
+    if restaurant.business_hours.wednesday != content["business_hours"][2]: 
+        restaurant.business_hours.wednesday = content["business_hours"][2]
         business_hours_updated = True
-    if restaurant.business_hours.thursday != content["business_hours"]["3"]: 
-        restaurant.business_hours.thursday = content["business_hours"]["3"]
+    if restaurant.business_hours.thursday != content["business_hours"][3]: 
+        restaurant.business_hours.thursday = content["business_hours"][3]
         business_hours_updated = True
-    if restaurant.business_hours.friday != content["business_hours"]["4"]: 
-        restaurant.business_hours.friday = content["business_hours"]["4"]
+    if restaurant.business_hours.friday != content["business_hours"][4]: 
+        restaurant.business_hours.friday = content["business_hours"][4]
         business_hours_updated = True
-    if restaurant.business_hours.saturday != content["business_hours"]["5"]: 
-        restaurant.business_hours.saturday = content["business_hours"]["5"]
+    if restaurant.business_hours.saturday != content["business_hours"][5]: 
+        restaurant.business_hours.saturday = content["business_hours"][5]
         business_hours_updated = True
-    if restaurant.business_hours.sunday != content["business_hours"]["6"]: 
-        restaurant.business_hours.sunday = content["business_hours"]["6"]
+    if restaurant.business_hours.sunday != content["business_hours"][6]: 
+        restaurant.business_hours.sunday = content["business_hours"][6]
         business_hours_updated = True
     if business_hours_updated:
         restaurant.business_hours.updated_at = db.func.current_timestamp()
