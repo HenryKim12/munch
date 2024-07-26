@@ -29,6 +29,21 @@ class Restaurant(db.Model):
     def __repr__(self):
         return f'<Restaurant {self.name}>'
     
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "yelp_business_id": self.yelp_business_id,
+            "name": self.name,
+            "address": self.address,
+            "phone_number": self.phone_number,
+            "menu": self.menu.to_dict(),
+            "categories": self.categories,
+            "price": self.price,
+            "rating": self.rating,
+            "business_hours": self.business_hours.to_dict(),
+            "yelp_url": self.yelp_url,
+        }
+    
 class BusinessHours(db.Model):
     __tablename__ = 'business_hours'
     __table_args__ = {'schema': os.getenv("SCHEMA")}
@@ -46,6 +61,18 @@ class BusinessHours(db.Model):
 
     def __repr__(self):
         return f'<Business Hours {self.ID}>'
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "monday": self.monday,
+            "tuesday": self.tuesday,
+            "wednesday": self.wednesday,
+            "thursday": self.thursday,
+            "friday": self.friday,
+            "saturday": self.saturday,
+            "sunday": self.sunday,
+        }
     
 class Menu(db.Model):
     __tablename__ = 'menu'
@@ -59,3 +86,10 @@ class Menu(db.Model):
 
     def __repr__(self):
         return f'<Menu {self.ID}>'
+    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "url": self.url,
+            "popular_dishes": self.popular_dishes
+        }

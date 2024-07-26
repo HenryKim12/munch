@@ -73,8 +73,8 @@ def fetch_yelp_api(location):
                 address = ""
                 display_address = restaurant["location"]["display_address"]
                 for val in display_address:
-                    address += val
-                content["address"] = address
+                    address += val + ", "
+                content["address"] = address[:-2]
 
                 open_hours = restaurant["business_hours"][0]["open"]
                 business_hours = {k: [] for k in range(7)}
@@ -304,20 +304,28 @@ def cache_data(restaurant_contents):
 
 def get_restaurants():
     restaurants = models.Restaurant.query.all()
-    return restaurants
+    restaurants_list = [restaurant.to_dict() for restaurant in restaurants]
+    return restaurants_list
 
 def get_restaurant_by_id(id):
     restaurant = db.session.get(models.Restaurant, id)
     if not restaurant:
         raise ValueError("Restaurant does not exist.")
-    return restaurant
+    return restaurant.to_dict()
 
-def get_unrated_restaurant_ids(data):
+def get_unrated_restaurants(data):
     rated_ids = data["rated_restaurants"]
     all_restaurants = models.Restaurant.query.all()
-    unrated_ids = []
+    unrated_restaurants = []
     for restaurant in all_restaurants:
         if restaurant.id not in rated_ids:
-            unrated_ids.append(restaurant.id)
-    return unrated_ids
+            unrated_restaurants.append(restaurant.to_dict())
+    return unrated_restaurants
+
+def get_rated_restaurants(data):
+    res = []
+    for id in data["restaurant_ids"]:
+        restaurant = db.session.get(models.Restaurant, id)
+        res.append(restaurant.to_dict())
+    return res
     

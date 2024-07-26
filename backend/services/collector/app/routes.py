@@ -35,12 +35,21 @@ def getByID(id):
     except Exception as e:
         return jsonify(str(e)), 400
     
-@main.route('/restaurants', methods=["POST"])
-def get_unrated_restaurant_ids():
+@main.route('/restaurants/unrated', methods=["POST"])
+def get_unrated_restaurants():
     try:
         data = request.get_json()
-        unratedRestaurants = services.get_unrated_restaurant_ids(data)
+        unratedRestaurants = services.get_unrated_restaurants(data)
         return jsonify(unratedRestaurants), 200
     except Exception as e:
         return jsonify(str(e)), 400
     
+
+@main.route('/restaurants/rated', methods=["POST"])
+def get_rated_restaurants():
+    try:
+        data = request.get_json()
+        unratedRestaurants = services.get_rated_restaurants(data)
+        return jsonify(unratedRestaurants), 200
+    except Exception as e:
+        return jsonify(str(e)), 400
