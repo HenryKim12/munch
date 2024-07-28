@@ -97,54 +97,25 @@ def content_based_filtering(user_id):
     feature_vectors = np.hstack([binary_features, categorical_encoded, numerical_standardized])
     similarity_matrix = cosine_similarity(feature_vectors)
 
-    # TODO: calculate highest similarities + handle in case they share the same recommendation + decide
-    #       if its better to have a recommendation for each restaurant or grab the net highest regardless
-    scores = similarity_matrix[:content_limit] * similarity_matrix[content_limit:]
+    recommendation_scores = []
+    for c in range(content_limit, len(similarity_matrix[0])):
+        score = 0
+        for r in range(content_limit):
+            score += similarity_matrix[r, c] * user_ratings[r]["rating"]
+        recommendation_scores.append(score)
 
+    restaurant_recommendation_mapping = {}
+    for i in range(len(user_unrated_restaurants)):
+        restaurant_recommendation_mapping[user_unrated_restaurants[i]["id"]] = recommendation_scores[i]
 
-    
+    sorted_restaurant_recommendation_mapping = sorted(restaurant_recommendation_mapping.items(), key=lambda x: x[1], reverse=True)
 
-
-
-# from sklearn.preprocessing import OneHotEncoder
-# import numpy as np
-
-# # Sample data: each sublist represents a restaurant
-# # [bar, good view, outdoor seating, cuisine type]
-# restaurants = [
-#     [1, 1, 0, 'Italian'],
-#     [0, 1, 1, 'Chinese'],
-#     [1, 0, 1, 'Mexican'],
-# ]
-
-# # Split into binary and categorical features
-# binary_features = [r[:3] for r in restaurants]
-# cuisine_types = [r[3] for r in restaurants]
-
-# # One-hot encode the categorical features
-# encoder = OneHotEncoder(sparse=False)
-# cuisine_encoded = encoder.fit_transform(np.array(cuisine_types).reshape(-1, 1))
-
-# # Combine binary and encoded categorical features
-# feature_vectors = np.hstack([binary_features, cuisine_encoded])
-# print(feature_vectors)
-
-# from sklearn.metrics.pairwise import cosine_similarity
-
-# # Calculate cosine similarity between restaurants
-# similarity_matrix = cosine_similarity(feature_vectors)
-
-# print(similarity_matrix)
-
-
+    N = 10
+    top_recommendations = [id for id, score in sorted_restaurant_recommendation_mapping[:N]]
+    return top_recommendations
 
 def collaborative_filtering():
     pass
-
-
-def recommend(user_id):
-    content_based_filtering(user_id)
-    return "done"
 #     user_restaurant_ratings = get_user_ratings(user_id)
 #     rated_data = pd.json_normalize(user_restaurant_ratings)
 
