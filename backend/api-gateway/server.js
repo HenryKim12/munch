@@ -14,7 +14,7 @@ app.use((req, res, next) => {
     next();
 })
 
-app.use("/service/collector", collectorRouter)
+app.use("/collector", collectorRouter)
 
 app.listen(process.env.PORT, () => {
     console.log(`listening on port ${process.env.PORT}`);
