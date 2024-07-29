@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 # content-based filtering
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.model_selection import train_test_split
 
 # collaborative filtering
 from surprise import Dataset, Reader, SVD, accuracy
@@ -30,16 +31,19 @@ def get_user_unrated_restaurants(user_ratings):
     return response.json()
 
 def content_based_filtering(user_id):
-    # [bar/happy hour, outdoor seating, parking, vegan, pricing, rating]
+    # [bar, outdoor seating, happy hour, vegan, pricing, rating]
     user_ratings = get_user_ratings(user_id)
 
     user_rated_restaurants = get_user_rated_restaurants(user_ratings)
     user_restaurant_ratings_df = pd.json_normalize(user_rated_restaurants)
+    # train_data, test_data = train_test_split(user_restaurant_ratings_df, test_size=0.2, random_state=42)
+
     user_restaurant_ratings_df.sort_values(by=["rating"], ascending=False)
 
     user_unrated_restaurants = get_user_unrated_restaurants(user_ratings)
     user_unrated_restaurants_df = pd.json_normalize(user_unrated_restaurants)
 
+    # get top 5 highest rated restaurants; if user has less than 5 ratings, use the number of ratings that user has
     content_limit = 5
     if user_restaurant_ratings_df.shape[0] < 5:
         content_limit = user_restaurant_ratings_df.shape[0]
@@ -51,11 +55,11 @@ def content_based_filtering(user_id):
 
         rated_features = [0] * 6
         for category in row["categories"]:
-            if "bar" in category or "happy hour" in category:
+            if "bar" in category:
                 rated_features[0] = 1
             if "outdoor" in category:
                 rated_features[1] = 1
-            if "parking" in category:
+            if "happy hour" in category:
                 rated_features[2] = 1
             if "vegan" in category:
                 rated_features[3] = 1
@@ -67,11 +71,11 @@ def content_based_filtering(user_id):
     for i, row in user_unrated_restaurants_df.iterrows():
         unrated_features = [0] * 6
         for category in row["categories"]:
-            if "bar" in category or "happy hour" in category:
+            if "bar" in category:
                 unrated_features[0] = 1
             if "outdoor" in category:
                 unrated_features[1] = 1
-            if "parking" in category:
+            if "happy hour" in category:
                 unrated_features[2] = 1
             if "vegan" in category:
                 unrated_features[3] = 1
@@ -84,7 +88,7 @@ def content_based_filtering(user_id):
     features_matrix.extend(rated_features_list)
     features_matrix.extend(unrated_features_list)
     
-    binary_features = [features[:4] for features in features_matrix] # [bar/happy hour, outdoor seating, parking, vegan]
+    binary_features = [features[:4] for features in features_matrix] # [bar, outdoor seating, happy hour, vegan]
     categorical_features = [features[4] for features in features_matrix] # [price]
     numerical_features = [features[5] for features in features_matrix] # [rating]
 
@@ -97,6 +101,7 @@ def content_based_filtering(user_id):
     feature_vectors = np.hstack([binary_features, categorical_encoded, numerical_standardized])
     similarity_matrix = cosine_similarity(feature_vectors)
 
+    # aggregate similarity for unrated restaurant and weight it with the user ratings
     recommendation_scores = []
     for c in range(content_limit, len(similarity_matrix[0])):
         score = 0
@@ -115,20 +120,6 @@ def content_based_filtering(user_id):
     return top_recommendations
 
 def collaborative_filtering():
+    # TODO: implement when data is less sparse (future feature)
     pass
-#     user_restaurant_ratings = get_user_ratings(user_id)
-#     rated_data = pd.json_normalize(user_restaurant_ratings)
 
-#     user_unrated_restaurant_ids = get_unrated_restaurant_ids(user_restaurant_ratings)
-
-#     reader = Reader(rating_scale=(0, 5))
-#     surprise_data = Dataset.load_from_df(rated_data[['user_id', 'restaurant_id', 'rating']], reader)
-#     trainset, testset = train_test_split(surprise_data, test_size=0.25)
-
-#     algo = SVD()
-#     algo.fit(trainset)
-#     test_prediction = algo.test(testset)
-#     accuracy.rmse(test_prediction)
-
-#     predictions = [algo.predict(user_id, unrated_restaurant) for unrated_restaurant in user_unrated_restaurant_ids]
-#     return predictions
