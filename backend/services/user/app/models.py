@@ -26,7 +26,7 @@ class User(db.Model):
             "username": self.username,
             "email": self.email,
             "password": self.password,
-            "restaurants": self.restaurants
+            "restaurants": [restaurant.to_dict() for restaurant in self.restaurants]
         }
 
     def __getitem__(self, key):

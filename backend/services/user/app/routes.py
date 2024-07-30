@@ -89,7 +89,7 @@ def del_user_restaurant(user_id, restaurant_id):
     except Exception as e:
         return jsonify(str(e)), 400
     
-@main.route("/users/<int:id>/restaurants<int:restaurant_id>", methods=["PUT"])
+@main.route("/users/<int:user_id>/restaurants/<int:restaurant_id>", methods=["PUT"])
 def update_user_restaurant(user_id, restaurant_id):
     try:
         data = request.get_json()

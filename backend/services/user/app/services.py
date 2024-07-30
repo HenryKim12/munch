@@ -87,8 +87,8 @@ def add_user_restaurant(user_id, data):
     db.session.commit()
 
 def delete_user_restaurant(user_id, restaurant_id):
-    existingRating = db.session.query(models.UserRestaurant.id).filter(and_(models.UserRestaurant.user_id == user_id, 
-                                                                            models.UserRestaurant.restaurant_id == restaurant_id)).first()
+    existingRating = db.session.query(models.UserRestaurant).filter(and_(models.UserRestaurant.user_id == user_id,
+                                                                         models.UserRestaurant.restaurant_id == restaurant_id)).one_or_none()
     if not existingRating:
         raise ValueError("User does not have rating for restaurant")
 
@@ -96,8 +96,8 @@ def delete_user_restaurant(user_id, restaurant_id):
     db.session.commit()
 
 def update_user_restaurant(user_id, restaurant_id, data):
-    existingRating = db.session.query(models.UserRestaurant.id).filter(and_(models.UserRestaurant.user_id == user_id, 
-                                                                            models.UserRestaurant.restaurant_id == restaurant_id)).first()
+    existingRating = db.session.query(models.UserRestaurant).filter(and_(models.UserRestaurant.user_id == user_id,
+                                                                         models.UserRestaurant.restaurant_id == restaurant_id)).first()
     
     if not existingRating:
         raise ValueError("User does not have rating for restaurant")
