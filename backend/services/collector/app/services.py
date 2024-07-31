@@ -313,8 +313,9 @@ def get_restaurant_by_id(id):
         raise ValueError("Restaurant does not exist.")
     return restaurant.to_dict()
 
-def get_unrated_restaurants(data):
-    rated_ids = data["rated_restaurants"]
+def get_unrated_restaurants(user_id):
+    user_ratings = get_user_ratings(user_id)
+    rated_ids = [rating["restaurant_id"] for rating in user_ratings]
     all_restaurants = models.Restaurant.query.all()
     unrated_restaurants = []
     for restaurant in all_restaurants:
@@ -322,10 +323,16 @@ def get_unrated_restaurants(data):
             unrated_restaurants.append(restaurant.to_dict())
     return unrated_restaurants
 
-def get_rated_restaurants(data):
+def get_rated_restaurants(user_id):
+    user_ratings = get_user_ratings(user_id)
+    rated_ids = [rating["restaurant_id"] for rating in user_ratings]
     res = []
-    for id in data["restaurant_ids"]:
+    for id in rated_ids:
         restaurant = db.session.get(models.Restaurant, id)
         res.append(restaurant.to_dict())
     return res
+
+def get_user_ratings(user_id):
+    response = requests.get(f"{os.getenv("USER_API_URL")}/users/{user_id}/restaurants")
+    return response.json()
     
