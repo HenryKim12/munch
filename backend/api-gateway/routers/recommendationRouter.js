@@ -3,6 +3,7 @@ const recommendationController = require("../controllers/recommendationControlle
 const express = require("express")
 const router = express.Router()
 
-// router.get("/restaurants", collectorController.getRestaurants);
+router.get("/content/:user_id", recommendationController.getContentRecommendation);
+router.get("/collab", recommendationController.getCollabRecommendation);
 
 module.exports = router

@@ -82,7 +82,7 @@ def content_based_filtering(user_id):
     sorted_restaurant_recommendation_mapping = sorted(restaurant_recommendation_map.items(), key=lambda x: x[1], reverse=True)
 
     N = 10
-    top_recommendations = [id for id, score in sorted_restaurant_recommendation_mapping[:N]]
+    top_recommendations = [int(id) for id, score in sorted_restaurant_recommendation_mapping[:N]]
     return top_recommendations
 
 def get_feature_vectors(df):
